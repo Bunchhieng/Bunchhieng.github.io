@@ -109,14 +109,14 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%2328a745'/><path d='M50 15a35 35 0 1 0 0 70 35 35 0 0 0 0-70zm0 5a30 30 0 1 1 0 60 30 30 0 0 1 0-60zm0 5a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 5a20 20 0 1 1 0 40 20 20 0 0 1 0-40zm0 5a15 15 0 1 0 0 30 15 15 0 0 0 0-30zm0 5a10 10 0 1 1 0 20 10 10 0 0 1 0-20z' fill='%23ffffff'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
           },
           animation: {
             'fade-in': 'fadeIn 0.5s ease-in',
@@ -453,7 +453,7 @@
       color: var(--chrome-text);
       font-size: 14px;
       outline: none;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .chrome-star-btn {
@@ -677,6 +677,251 @@
       position: relative;
       display: flex;
       flex-direction: row;
+      transition: all 0.3s ease;
+    }
+
+    /* Viewport with DevTools docked at bottom */
+    .chrome-viewport.devtools-bottom {
+      flex-direction: column;
+    }
+
+    /* Mobile mode only affects the content area, not the viewport container */
+    .chrome-viewport.mobile-mode {
+      background: #1a1a1a;
+    }
+    
+    .chrome-viewport.mobile-mode .chrome-content-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Mobile Device Frame */
+    .chrome-mobile-frame {
+      width: 390px;
+      height: 844px;
+      background: #1c1c1e;
+      border-radius: 50px;
+      padding: 12px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      display: none;
+      flex-direction: column;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .chrome-viewport.mobile-mode .chrome-mobile-frame {
+      display: flex;
+    }
+
+    /* Hide the desktop content (portfolio/blog) when mobile frame is shown */
+    .chrome-viewport.mobile-mode #portfolio-content,
+    .chrome-viewport.mobile-mode #blog-content {
+      display: none;
+    }
+
+    .chrome-mobile-screen {
+      flex: 1;
+      background: #000;
+      border-radius: 42px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #content-area-mobile {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    /* Ensure cloned content is visible in mobile view */
+    #content-area-mobile * {
+      color: inherit;
+      box-sizing: border-box;
+    }
+    
+    /* Force vertical layout in mobile */
+    #content-area-mobile > * {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* Dynamic Island */
+    .chrome-mobile-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 37px;
+      background: #000;
+      border-radius: 19px;
+      z-index: 1000;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .chrome-viewport.mobile-mode #content-area-mobile {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      padding-top: 50px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .chrome-viewport:not(.mobile-mode) .chrome-mobile-frame {
+      display: none;
+    }
+
+    /* Mobile mode responsive adjustments for content inside frame */
+    #content-area-mobile {
+      font-size: 14px;
+      width: 100% !important;
+    }
+
+    #content-area-mobile *,
+    #content-area-mobile img,
+    #content-area-mobile svg {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Header adjustments */
+    #content-area-mobile header {
+      padding: 0.5rem 0.75rem !important;
+    }
+
+    #content-area-mobile .h-16 {
+      height: 3.5rem !important;
+    }
+
+    /* Hide navigation menu on mobile */
+    #content-area-mobile nav {
+      display: none !important;
+    }
+
+    /* Container adjustments */
+    #content-area-mobile .container,
+    #content-area-mobile .max-w-7xl,
+    #content-area-mobile .max-w-6xl,
+    #content-area-mobile .max-w-5xl,
+    #content-area-mobile .max-w-4xl,
+    #content-area-mobile .max-w-3xl {
+      max-width: 100% !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+    
+    /* Logo size */
+    #content-area-mobile header svg {
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+    }
+
+    /* Typography */
+    #content-area-mobile h1 {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+      margin-bottom: 1rem !important;
+    }
+
+    #content-area-mobile h2 {
+      font-size: 1.5rem !important;
+      line-height: 1.3 !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    #content-area-mobile h3 {
+      font-size: 1.125rem !important;
+      line-height: 1.4 !important;
+      margin-bottom: 0.5rem !important;
+    }
+
+    #content-area-mobile p {
+      font-size: 0.875rem !important;
+      line-height: 1.6 !important;
+      margin-bottom: 1rem !important;
+    }
+
+    #content-area-mobile li {
+      font-size: 0.875rem !important;
+      line-height: 1.5 !important;
+    }
+
+    /* Layout adjustments */
+    #content-area-mobile .grid {
+      display: block !important;
+    }
+
+    #content-area-mobile .grid > * {
+      margin-bottom: 1rem !important;
+    }
+
+    #content-area-mobile section {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+    }
+
+    #content-area-mobile .py-20,
+    #content-area-mobile .py-16 {
+      padding-top: 2.5rem !important;
+      padding-bottom: 2.5rem !important;
+    }
+
+    #content-area-mobile .py-12 {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+    }
+
+    #content-area-mobile .py-8 {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+
+    #content-area-mobile .mb-16 {
+      margin-bottom: 2rem !important;
+    }
+
+    #content-area-mobile .mb-12 {
+      margin-bottom: 1.5rem !important;
+    }
+
+    #content-area-mobile .mb-8 {
+      margin-bottom: 1rem !important;
+    }
+
+    #content-area-mobile .gap-12,
+    #content-area-mobile .gap-8 {
+      gap: 1rem !important;
+    }
+
+    /* Skills section - keep horizontal list format */
+    #content-area-mobile .skill-tag {
+      font-size: 0.75rem !important;
+      padding: 0.375rem 0.625rem !important;
+    }
+
+    /* Footer */
+    #content-area-mobile footer {
+      padding: 2rem 1rem !important;
+    }
+
+    #content-area-mobile footer .gap-6 {
+      gap: 1rem !important;
+    }
+
+    /* Buttons */
+    #content-area-mobile button,
+    #content-area-mobile .btn {
+      font-size: 0.875rem !important;
+      padding: 0.5rem 1rem !important;
     }
 
     .chrome-content-area {
@@ -686,6 +931,7 @@
       overflow-x: hidden;
       position: relative;
       background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+      order: 1;
     }
 
     #portfolio-content,
@@ -700,6 +946,27 @@
       height: 100%;
       border: none;
       background: #000000;
+    }
+
+    /* Mobile navigation menu styles */
+    .mobile-nav-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #9ca3af;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .mobile-nav-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mobile-nav-link.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* Custom scrollbar */
@@ -731,10 +998,32 @@
       position: relative;
       z-index: 10;
       pointer-events: auto;
+      order: 2;
+      flex-shrink: 0;
     }
 
     .chrome-devtools.hidden {
       display: none;
+    }
+
+    /* DevTools Dock Positions */
+    .chrome-devtools.dock-left {
+      order: 0;
+      border-left: none;
+      border-right: 1px solid #3c3c3c;
+    }
+
+    .chrome-devtools.dock-bottom {
+      width: 100%;
+      height: 300px;
+      border-left: none;
+      border-top: 1px solid #3c3c3c;
+    }
+
+    /* DevTools should not be affected by mobile mode */
+    .chrome-viewport.mobile-mode .chrome-devtools {
+      position: relative;
+      align-self: stretch;
     }
 
     .devtools-header {
@@ -798,9 +1087,86 @@
       color: #d4d4d4;
     }
 
+    .devtools-btn.active {
+      background: #3c3c3c;
+      color: #3c9ae8;
+    }
+
     .devtools-btn svg {
       width: 16px;
       height: 16px;
+    }
+
+    /* DevTools Menu Dropdown */
+    .devtools-menu-dropdown {
+      position: fixed;
+      background: #2d2d2d;
+      border: 1px solid #3c3c3c;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      min-width: 240px;
+      padding: 4px 0;
+    }
+
+    .devtools-menu-dropdown.hidden {
+      display: none;
+    }
+
+    .devtools-menu-section {
+      padding: 4px 0;
+      border-bottom: 1px solid #3c3c3c;
+    }
+
+    .devtools-menu-section:last-child {
+      border-bottom: none;
+    }
+
+    .devtools-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      color: #d4d4d4;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .devtools-menu-item:hover {
+      background: #3c3c3c;
+    }
+
+    .devtools-menu-item-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9b9b9b;
+    }
+
+    .devtools-menu-item-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .devtools-menu-item-text {
+      flex: 1;
+    }
+
+    .devtools-menu-item-shortcut {
+      color: #9b9b9b;
+      font-size: 11px;
+    }
+
+    .devtools-menu-label {
+      padding: 8px 16px;
+      color: #9b9b9b;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .devtools-content {
@@ -2984,10 +3350,10 @@
       </div>
 
       <!-- Right Controls -->
-      <div class="chrome-right-controls">
-        <button class="chrome-icon-btn" id="extensions-btn" aria-label="Extensions">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
-        </button>
+        <div class="chrome-right-controls">
+          <button class="chrome-icon-btn" id="extensions-btn" aria-label="Extensions">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+          </button>
         <button class="chrome-icon-btn" id="menu-btn" aria-label="Chrome menu">
           <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
         </button>
@@ -3080,10 +3446,19 @@
       </div>
     </div>
 
-    <!-- Viewport (Portfolio Content) -->
-    <div class="chrome-viewport" id="viewport">
-      <!-- Content Area -->
-      <div class="chrome-content-area" id="content-area">
+      <!-- Viewport (Portfolio Content) -->
+      <div class="chrome-viewport" id="viewport">
+        <!-- Content Area (Desktop) -->
+        <div class="chrome-content-area" id="content-area">
+        <!-- Mobile Device Frame -->
+        <div class="chrome-mobile-frame">
+          <div class="chrome-mobile-notch"></div>
+          <div class="chrome-mobile-screen">
+            <div class="chrome-content-area" id="content-area-mobile">
+              <!-- Content will be shown here in mobile mode -->
+            </div>
+          </div>
+        </div>
       <!-- Portfolio Content -->
       <div id="portfolio-content">
       <!-- SaaS-Style Header -->
@@ -3122,17 +3497,45 @@
               <a href="#contact" class="nav-link-saas">Contact</a>
             </nav>
 
-            <!-- CTA Button -->
+            <!-- Right side buttons -->
             <div class="flex items-center gap-3">
+              <!-- GitHub Button (Desktop) -->
               <a href="https://github.com/Bunchhieng" 
                  target="_blank"
-                 class="inline-flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg text-sm font-medium transition-all duration-200">
+                 class="hidden md:inline-flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg text-sm font-medium transition-all duration-200">
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
                 GitHub
               </a>
+              
+              <!-- Mobile Menu Button -->
+              <button id="mobile-menu-btn" class="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
             </div>
+          </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-nav-menu" class="hidden md:hidden border-t border-gray-800/50 bg-black/95 backdrop-blur-md">
+          <div class="container max-w-7xl mx-auto px-4 py-4">
+            <nav class="flex flex-col gap-3">
+              <a href="#about" class="mobile-nav-link active">About</a>
+              <a href="#projects" class="mobile-nav-link">Projects</a>
+              <a href="#skills" class="mobile-nav-link">Skills</a>
+              <a href="#contact" class="mobile-nav-link">Contact</a>
+              <a href="https://github.com/Bunchhieng" 
+                 target="_blank"
+                 class="inline-flex items-center justify-center px-4 py-2 mt-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg text-sm font-medium transition-all duration-200">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+            </nav>
           </div>
         </div>
       </header>
@@ -3435,103 +3838,72 @@
 
     <!-- Skills Section -->
     <section id="skills" class="mb-12 border-t border-gray-800 pt-12">
-      <h2 class="text-xl font-bold text-white mb-6">Skills & Expertise</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Frontend -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            <div class="text-sm font-semibold text-blue-400">Frontend</div>
+      <h2 class="text-xl font-bold text-white mb-8">Skills & Expertise</h2>
+      <div class="space-y-6">
+        <!-- Languages -->
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-shrink-0 w-32">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Languages</div>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">React</span>
-            <span class="px-2 py-0.5 text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">Next.js</span>
-            <span class="px-2 py-0.5 text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">Tailwind</span>
-            <span class="px-2 py-0.5 text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">React Native</span>
-            <span class="px-2 py-0.5 text-xs bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded">Expo</span>
+          <div class="flex-1 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">TypeScript</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">JavaScript</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Go</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Rust</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Python</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-shrink-0 w-32">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Frontend</div>
+          </div>
+          <div class="flex-1 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">React</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Next.js</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Tailwind CSS</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">React Native</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Expo</span>
           </div>
         </div>
 
         <!-- Backend -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
-            </svg>
-            <div class="text-sm font-semibold text-green-400">Backend</div>
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-shrink-0 w-32">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Backend</div>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-green-500/10 text-green-300 border border-green-500/20 rounded">Node.js</span>
-            <span class="px-2 py-0.5 text-xs bg-green-500/10 text-green-300 border border-green-500/20 rounded">Hono</span>
-            <span class="px-2 py-0.5 text-xs bg-green-500/10 text-green-300 border border-green-500/20 rounded">Supabase</span>
-            <span class="px-2 py-0.5 text-xs bg-green-500/10 text-green-300 border border-green-500/20 rounded">PostgreSQL</span>
-          </div>
-        </div>
-
-        <!-- Languages -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            <div class="text-sm font-semibold text-yellow-400">Languages</div>
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded">TypeScript</span>
-            <span class="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded">JavaScript</span>
-            <span class="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded">Go</span>
-            <span class="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded">Rust</span>
-            <span class="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/20 rounded">Python</span>
+          <div class="flex-1 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Node.js</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Hono</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Supabase</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">PostgreSQL</span>
           </div>
         </div>
 
         <!-- Blockchain -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-            </svg>
-            <div class="text-sm font-semibold text-purple-400">Blockchain</div>
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-shrink-0 w-32">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Blockchain</div>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded">CosmWasm</span>
-            <span class="px-2 py-0.5 text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded">Cosmos SDK</span>
-            <span class="px-2 py-0.5 text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded">Solidity</span>
-            <span class="px-2 py-0.5 text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded">Web3</span>
+          <div class="flex-1 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">CosmWasm</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Cosmos SDK</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Solidity</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Web3</span>
           </div>
         </div>
 
         <!-- DevOps & Tools -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <div class="text-sm font-semibold text-orange-400">DevOps & Tools</div>
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-shrink-0 w-32">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">DevOps & Tools</div>
           </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded">Git</span>
-            <span class="px-2 py-0.5 text-xs bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded">Docker</span>
-            <span class="px-2 py-0.5 text-xs bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded">Vercel</span>
-            <span class="px-2 py-0.5 text-xs bg-orange-500/10 text-orange-300 border border-orange-500/20 rounded">GitHub Actions</span>
-          </div>
-        </div>
-
-        <!-- Mobile -->
-        <div class="p-4 rounded-lg bg-gray-900/50 border border-gray-800">
-          <div class="flex items-center gap-2 mb-3">
-            <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-            </svg>
-            <div class="text-sm font-semibold text-pink-400">Mobile</div>
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-xs bg-pink-500/10 text-pink-300 border border-pink-500/20 rounded">React Native</span>
-            <span class="px-2 py-0.5 text-xs bg-pink-500/10 text-pink-300 border border-pink-500/20 rounded">Expo</span>
-            <span class="px-2 py-0.5 text-xs bg-pink-500/10 text-pink-300 border border-pink-500/20 rounded">iOS</span>
-            <span class="px-2 py-0.5 text-xs bg-pink-500/10 text-pink-300 border border-pink-500/20 rounded">Android</span>
+          <div class="flex-1 flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Git</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Docker</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">Vercel</span>
+            <span class="px-3 py-1.5 text-sm font-medium text-gray-300 bg-gray-900/60 border border-gray-800 rounded-md hover:border-gray-700 hover:bg-gray-900/80 transition-colors">GitHub Actions</span>
           </div>
         </div>
       </div>
@@ -3620,6 +3992,13 @@
       <div class="chrome-devtools" id="devtools">
         <!-- DevTools Header -->
         <div class="devtools-header">
+          <div class="devtools-actions">
+            <button class="devtools-btn" id="mobile-toggle-btn" title="Toggle device toolbar (Ctrl+Shift+M)">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
           <div class="devtools-tabs">
             <button class="devtools-tab active" data-panel="console">Console</button>
             <button class="devtools-tab" data-panel="elements">Elements</button>
@@ -3630,6 +4009,11 @@
             <button class="devtools-btn" id="clear-console" title="Clear console">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+              </svg>
+            </button>
+            <button class="devtools-btn" id="devtools-menu-btn" title="Customize and control DevTools">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
               </svg>
             </button>
             <button class="devtools-btn" id="close-devtools" title="Close DevTools (F12)">
@@ -3786,6 +4170,37 @@
     </div>
     <div class="chrome-extensions-content" id="extensions-content">
       <!-- Extensions will be rendered here -->
+    </div>
+  </div>
+
+  <!-- DevTools Menu Dropdown -->
+  <div id="devtools-menu-dropdown" class="devtools-menu-dropdown hidden">
+    <div class="devtools-menu-label">Dock side</div>
+    <div class="devtools-menu-section">
+      <div class="devtools-menu-item" data-dock="left">
+        <div class="devtools-menu-item-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <div class="devtools-menu-item-text">Dock to left</div>
+      </div>
+      <div class="devtools-menu-item" data-dock="bottom">
+        <div class="devtools-menu-item-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+        </div>
+        <div class="devtools-menu-item-text">Dock to bottom</div>
+      </div>
+      <div class="devtools-menu-item" data-dock="right">
+        <div class="devtools-menu-item-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <div class="devtools-menu-item-text">Dock to right</div>
+      </div>
     </div>
   </div>
 
@@ -4267,6 +4682,7 @@
         this.bookmarks = this.loadBookmarks();
         this.extensions = this.loadExtensions();
         this.availableExtensions = this.getAvailableExtensions();
+        this.devToolsDock = 'right'; // 'left', 'right', or 'bottom'
         this.init();
       }
 
@@ -4542,6 +4958,12 @@
             this.refresh();
           }
 
+          // Cmd/Ctrl + Shift + M: Toggle mobile view
+          if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'M') {
+            e.preventDefault();
+            this.toggleMobileView();
+          }
+
           // Cmd/Ctrl + W: Close tab
           if ((e.metaKey || e.ctrlKey) && e.key === 'w') {
             e.preventDefault();
@@ -4734,18 +5156,35 @@
           }
         });
 
-        // Show/hide content
+        // Show/hide content (desktop)
         const portfolioContent = document.getElementById('portfolio-content');
         const blogContent = document.getElementById('blog-content');
+
+        // Mobile content area
+        const contentAreaMobile = document.getElementById('content-area-mobile');
+        const viewport = document.getElementById('viewport');
+        const isMobileMode = viewport?.classList.contains('mobile-mode');
 
         if (tabType === 'portfolio') {
           portfolioContent?.classList.remove('hidden');
           blogContent?.classList.add('hidden');
+          
+          // Update mobile content
+          if (isMobileMode && contentAreaMobile && portfolioContent) {
+            contentAreaMobile.innerHTML = portfolioContent.innerHTML;
+          }
+          
           this.updateURL();
           this.addToHistory('bunchhieng.github.io', 'Portfolio - Bunchhieng Soth');
         } else if (tabType === 'blog') {
           portfolioContent?.classList.add('hidden');
           blogContent?.classList.remove('hidden');
+          
+          // Update mobile content
+          if (isMobileMode && contentAreaMobile && blogContent) {
+            contentAreaMobile.innerHTML = blogContent.innerHTML;
+          }
+          
           const urlInput = document.getElementById('url-input');
           if (urlInput) {
             urlInput.value = 'bunchhieng.github.io/blog';
@@ -5747,6 +6186,121 @@
         const popup = document.getElementById('chrome-site-info-popup');
         popup?.classList.add('hidden');
       }
+
+      // Mobile view toggle
+      toggleMobileView() {
+        const viewport = document.getElementById('viewport');
+        const contentArea = document.getElementById('content-area');
+        const contentAreaMobile = document.getElementById('content-area-mobile');
+        const portfolioContent = document.getElementById('portfolio-content');
+        const blogContent = document.getElementById('blog-content');
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        
+        if (!viewport) return;
+        
+        const isMobileMode = viewport.classList.contains('mobile-mode');
+        
+        if (isMobileMode) {
+          // Switch to desktop
+          viewport.classList.remove('mobile-mode');
+          if (mobileToggleBtn) {
+            mobileToggleBtn.classList.remove('active');
+            mobileToggleBtn.title = 'Toggle device toolbar (Ctrl+Shift+M)';
+          }
+          this.showNotification('Desktop view');
+        } else {
+          // Switch to mobile
+          viewport.classList.add('mobile-mode');
+          
+          // Clone current active content to mobile
+          const activeTab = document.querySelector('.chrome-tab.active');
+          const tabType = activeTab?.dataset.tab || 'portfolio';
+          
+          if (contentAreaMobile) {
+            // Clear previous content
+            contentAreaMobile.innerHTML = '';
+            
+            // Clone the content
+            if (tabType === 'blog' && blogContent) {
+              const clonedContent = blogContent.cloneNode(true);
+              clonedContent.classList.remove('hidden');
+              clonedContent.style.display = 'block';
+              contentAreaMobile.appendChild(clonedContent);
+            } else if (portfolioContent) {
+              const clonedContent = portfolioContent.cloneNode(true);
+              clonedContent.classList.remove('hidden');
+              clonedContent.style.display = 'block';
+              contentAreaMobile.appendChild(clonedContent);
+            }
+          }
+          
+          if (mobileToggleBtn) {
+            mobileToggleBtn.classList.add('active');
+            mobileToggleBtn.title = 'Toggle device toolbar (Ctrl+Shift+M)';
+          }
+          this.showNotification('Mobile view - iPhone 14 Pro');
+        }
+      }
+
+      // DevTools dock position
+      setDevToolsDock(side) {
+        const devtools = document.getElementById('devtools');
+        const viewport = document.getElementById('viewport');
+        const resizer = document.getElementById('resizer');
+        
+        if (!devtools || !viewport) return;
+        
+        // Remove existing dock classes
+        devtools.classList.remove('dock-left', 'dock-right', 'dock-bottom');
+        viewport.classList.remove('devtools-left', 'devtools-right', 'devtools-bottom');
+        
+        // Apply new dock position
+        this.devToolsDock = side;
+        
+        if (side === 'left') {
+          devtools.classList.add('dock-left');
+          viewport.classList.add('devtools-left');
+          devtools.style.width = '600px';
+          devtools.style.height = '';
+          devtools.style.borderLeft = 'none';
+          devtools.style.borderRight = '1px solid #3c3c3c';
+          devtools.style.borderBottom = 'none';
+          if (resizer) {
+            resizer.style.cursor = 'ew-resize';
+            resizer.style.width = '4px';
+            resizer.style.height = '';
+          }
+          this.showNotification('DevTools docked to left');
+        } else if (side === 'bottom') {
+          devtools.classList.add('dock-bottom');
+          viewport.classList.add('devtools-bottom');
+          devtools.style.width = '';
+          devtools.style.height = '300px';
+          devtools.style.borderLeft = 'none';
+          devtools.style.borderRight = 'none';
+          devtools.style.borderTop = '1px solid #3c3c3c';
+          if (resizer) {
+            resizer.style.cursor = 'ns-resize';
+            resizer.style.width = '';
+            resizer.style.height = '4px';
+          }
+          this.showNotification('DevTools docked to bottom');
+        } else { // right (default)
+          devtools.classList.add('dock-right');
+          viewport.classList.add('devtools-right');
+          devtools.style.width = '600px';
+          devtools.style.height = '';
+          devtools.style.borderLeft = '1px solid #3c3c3c';
+          devtools.style.borderRight = 'none';
+          devtools.style.borderBottom = 'none';
+          if (resizer) {
+            resizer.style.cursor = 'ew-resize';
+            resizer.style.width = '4px';
+            resizer.style.height = '';
+          }
+          this.showNotification('DevTools docked to right');
+        }
+      }
     }
 
     // Initialize on DOM load
@@ -5756,8 +6310,36 @@
       // Store globally for console access
       window.chromeBrowser = chromeBrowser;
 
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      
+      if (mobileMenuBtn && mobileNavMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileNavMenu.classList.toggle('hidden');
+          
+          // Toggle hamburger icon to X
+          const svg = mobileMenuBtn.querySelector('svg');
+          if (mobileNavMenu.classList.contains('hidden')) {
+            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>';
+          } else {
+            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>';
+          }
+        });
+        
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileNavMenu.classList.add('hidden');
+            const svg = mobileMenuBtn.querySelector('svg');
+            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>';
+          });
+        });
+      }
+
       // Navigation Menu - Smooth Scrolling
-      const navLinks = document.querySelectorAll('.nav-link, .nav-link-saas');
+      const navLinks = document.querySelectorAll('.nav-link, .nav-link-saas, .mobile-nav-link');
       const contentArea = document.getElementById('content-area');
       const mobileViewport = document.getElementById('mobile-viewport');
       const scrollContainer = contentArea || mobileViewport;
@@ -5845,6 +6427,7 @@
       const consoleInput = document.getElementById('console-input');
       const clearConsoleBtn = document.getElementById('clear-console');
       const closeDevToolsBtn = document.getElementById('close-devtools');
+      const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
       const devtoolsTabs = document.querySelectorAll('.devtools-tab');
       const resizer = document.getElementById('resizer');
 
@@ -5985,6 +6568,53 @@
       // Toggle DevTools with F12
       closeDevToolsBtn.addEventListener('click', () => {
         devtools.classList.toggle('hidden');
+      });
+
+      // Mobile toggle button - needs to be after chromeBrowser is created
+      const mobileToggleBtnDevTools = document.getElementById('mobile-toggle-btn');
+      mobileToggleBtnDevTools?.addEventListener('click', () => {
+        if (chromeBrowser) {
+          chromeBrowser.toggleMobileView();
+        } else {
+          console.error('chromeBrowser not found');
+        }
+      });
+
+      // DevTools menu
+      const devtoolsMenuBtn = document.getElementById('devtools-menu-btn');
+      const devtoolsMenuDropdown = document.getElementById('devtools-menu-dropdown');
+      
+      devtoolsMenuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = devtoolsMenuDropdown.classList.contains('hidden');
+        
+        if (isHidden) {
+          // Position menu below button
+          const buttonRect = devtoolsMenuBtn.getBoundingClientRect();
+          devtoolsMenuDropdown.style.top = `${buttonRect.bottom + 4}px`;
+          devtoolsMenuDropdown.style.left = `${buttonRect.right - 240}px`; // Align to right
+          devtoolsMenuDropdown.classList.remove('hidden');
+        } else {
+          devtoolsMenuDropdown.classList.add('hidden');
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (devtoolsMenuDropdown && !devtoolsMenuDropdown.contains(e.target) && !devtoolsMenuBtn?.contains(e.target)) {
+          devtoolsMenuDropdown.classList.add('hidden');
+        }
+      });
+
+      // Handle dock side changes
+      document.querySelectorAll('.devtools-menu-item[data-dock]').forEach(item => {
+        item.addEventListener('click', () => {
+          const dockSide = item.dataset.dock;
+          if (window.chromeBrowser) {
+            window.chromeBrowser.setDevToolsDock(dockSide);
+          }
+          devtoolsMenuDropdown.classList.add('hidden');
+        });
       });
 
       document.addEventListener('keydown', (e) => {
