@@ -394,6 +394,59 @@
       align-items: flex-end;
     }
 
+    .chrome-bookmark-bar {
+      height: 32px;
+      background: var(--chrome-surface);
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      gap: 4px;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .chrome-bookmark-bar::-webkit-scrollbar {
+      height: 0;
+    }
+
+    .chrome-bookmark {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      transition: background-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .chrome-bookmark:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-bookmark-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-bookmark-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .chrome-bookmark-text {
+      font-size: 12px;
+    }
+
     .chrome-tabs {
       display: flex;
       align-items: center;
@@ -1296,8 +1349,6 @@
     /* Menu Dropdown */
     .chrome-menu-dropdown {
       position: fixed;
-      top: 86px;
-      right: calc(5vw + 12px);
       width: 320px;
       background: var(--chrome-surface);
       border-radius: 8px;
@@ -1342,6 +1393,755 @@
       margin-left: auto;
       color: var(--chrome-text-secondary);
       font-size: 12px;
+    }
+
+    /* History Panel */
+    .chrome-history-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chrome-history-panel.hidden {
+      display: none;
+    }
+
+    .chrome-history-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-history-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-history-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-history-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-history-search {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--chrome-border);
+    }
+
+    .chrome-history-search-input {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 8px;
+      color: var(--chrome-text);
+      font-size: 14px;
+    }
+
+    .chrome-history-search-input:focus {
+      outline: none;
+      border-color: var(--chrome-accent);
+    }
+
+    .chrome-history-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .chrome-history-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .chrome-history-item:hover {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-history-item-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .chrome-history-item-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chrome-history-item-title {
+      font-size: 14px;
+      color: var(--chrome-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-history-item-url {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-history-item-time {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      white-space: nowrap;
+    }
+
+    .chrome-history-clear {
+      padding: 16px 20px;
+      border-top: 1px solid var(--chrome-border);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .chrome-history-clear-btn {
+      padding: 8px 16px;
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 6px;
+      color: var(--chrome-text);
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .chrome-history-clear-btn:hover {
+      background: #3c3d40;
+    }
+
+    /* Downloads Panel */
+    .chrome-downloads-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chrome-downloads-panel.hidden {
+      display: none;
+    }
+
+    .chrome-downloads-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-downloads-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-downloads-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-downloads-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-downloads-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .chrome-download-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .chrome-download-item:hover {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-download-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-download-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chrome-download-name {
+      font-size: 14px;
+      color: var(--chrome-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-download-info {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chrome-download-progress {
+      width: 200px;
+      height: 4px;
+      background: var(--chrome-surface-variant);
+      border-radius: 2px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .chrome-download-progress-bar {
+      height: 100%;
+      background: var(--chrome-accent);
+      transition: width 0.3s;
+    }
+
+    .chrome-download-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chrome-download-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-download-btn:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    /* Bookmarks Panel */
+    .chrome-bookmarks-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chrome-bookmarks-panel.hidden {
+      display: none;
+    }
+
+    .chrome-bookmarks-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-bookmarks-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-bookmarks-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-bookmarks-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-bookmarks-search {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--chrome-border);
+    }
+
+    .chrome-bookmarks-search-input {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 8px;
+      color: var(--chrome-text);
+      font-size: 14px;
+    }
+
+    .chrome-bookmarks-search-input:focus {
+      outline: none;
+      border-color: var(--chrome-accent);
+    }
+
+    .chrome-bookmarks-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .chrome-bookmark-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .chrome-bookmark-item:hover {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-bookmark-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-bookmark-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chrome-bookmark-name {
+      font-size: 14px;
+      color: var(--chrome-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-bookmark-url {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-bookmark-actions {
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .chrome-bookmark-item:hover .chrome-bookmark-actions {
+      opacity: 1;
+    }
+
+    .chrome-bookmark-action-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-bookmark-action-btn:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    /* Search in Page Bar */
+    .chrome-findbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      background: var(--chrome-surface);
+      border-bottom: 1px solid var(--chrome-border);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .chrome-findbar.hidden {
+      display: none;
+    }
+
+    .chrome-findbar-input {
+      flex: 1;
+      padding: 6px 12px;
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 4px;
+      color: var(--chrome-text);
+      font-size: 14px;
+    }
+
+    .chrome-findbar-input:focus {
+      outline: none;
+      border-color: var(--chrome-accent);
+    }
+
+    .chrome-findbar-count {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+      white-space: nowrap;
+    }
+
+    .chrome-findbar-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .chrome-findbar-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-findbar-btn:hover:not(:disabled) {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-findbar-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .chrome-findbar-close {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-findbar-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    /* Tab Context Menu */
+    .chrome-tab-context-menu {
+      position: fixed;
+      background: var(--chrome-surface);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      z-index: 2000;
+      min-width: 200px;
+      padding: 4px 0;
+      border: 1px solid var(--chrome-border);
+    }
+
+    .chrome-tab-context-menu.hidden {
+      display: none;
+    }
+
+    .chrome-tab-context-item {
+      width: 100%;
+      height: 32px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .chrome-tab-context-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .chrome-tab-context-item svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .chrome-tab-context-divider {
+      height: 1px;
+      background: var(--chrome-border);
+      margin: 4px 0;
+    }
+
+    /* Settings Page */
+    .chrome-settings-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 900px;
+      max-height: 85vh;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chrome-settings-panel.hidden {
+      display: none;
+    }
+
+    .chrome-settings-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-settings-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-settings-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-settings-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-settings-search {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--chrome-border);
+    }
+
+    .chrome-settings-search-input {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 8px;
+      color: var(--chrome-text);
+      font-size: 14px;
+    }
+
+    .chrome-settings-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 20px;
+    }
+
+    .chrome-settings-sidebar {
+      border-right: 1px solid var(--chrome-border);
+      padding-right: 20px;
+    }
+
+    .chrome-settings-category {
+      padding: 12px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--chrome-text-secondary);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .chrome-settings-category:hover {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-settings-category.active {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+      font-weight: 500;
+    }
+
+    .chrome-settings-main {
+      overflow-y: auto;
+    }
+
+    .chrome-settings-section {
+      margin-bottom: 32px;
+    }
+
+    .chrome-settings-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--chrome-text);
+      margin-bottom: 16px;
+    }
+
+    .chrome-settings-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--chrome-border);
+    }
+
+    .chrome-settings-item-label {
+      flex: 1;
+    }
+
+    .chrome-settings-item-title {
+      font-size: 14px;
+      color: var(--chrome-text);
+      margin-bottom: 4px;
+    }
+
+    .chrome-settings-item-desc {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+    }
+
+    .chrome-settings-toggle {
+      width: 44px;
+      height: 24px;
+      background: var(--chrome-surface-variant);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .chrome-settings-toggle.active {
+      background: var(--chrome-accent);
+    }
+
+    .chrome-settings-toggle::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+
+    .chrome-settings-toggle.active::after {
+      transform: translateX(20px);
     }
 
     .chrome-menu-divider {
@@ -1853,6 +2653,53 @@
         <button class="chrome-new-tab-btn" aria-label="New tab">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
         </button>
+      </div>
+    </div>
+
+    <!-- Bookmark Bar -->
+    <div class="chrome-bookmark-bar" id="bookmark-bar">
+      <div class="chrome-bookmark" data-url="https://github.com/Bunchhieng" data-tab="portfolio">
+        <div class="chrome-bookmark-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">GitHub</span>
+      </div>
+      <div class="chrome-bookmark" data-url="https://www.linkedin.com/in/bunchhieng/" data-tab="portfolio">
+        <div class="chrome-bookmark-icon">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">LinkedIn</span>
+      </div>
+      <div class="chrome-bookmark" data-url="mailto:bunchhieng@gmail.com" data-tab="portfolio">
+        <div class="chrome-bookmark-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">Email</span>
+      </div>
+      <div class="chrome-bookmark" data-tab="blog">
+        <div class="chrome-bookmark-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">Blog</span>
+      </div>
+      <div class="chrome-bookmark" data-url="https://sportscard360.com" data-tab="portfolio">
+        <div class="chrome-bookmark-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">SportsCard360</span>
       </div>
     </div>
 
@@ -2530,6 +3377,39 @@
     </div>
   </div>
 
+  <!-- Downloads Panel -->
+  <div id="chrome-downloads-panel" class="chrome-downloads-panel hidden">
+    <div class="chrome-downloads-header">
+      <div class="chrome-downloads-title">Downloads</div>
+      <button class="chrome-downloads-close" id="downloads-close-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-downloads-content" id="downloads-content">
+      <!-- Download items will be inserted here -->
+    </div>
+  </div>
+
+  <!-- Bookmarks Panel -->
+  <div id="chrome-bookmarks-panel" class="chrome-bookmarks-panel hidden">
+    <div class="chrome-bookmarks-header">
+      <div class="chrome-bookmarks-title">Bookmarks</div>
+      <button class="chrome-bookmarks-close" id="bookmarks-close-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-bookmarks-search">
+      <input type="text" class="chrome-bookmarks-search-input" id="bookmarks-search-input" placeholder="Search bookmarks...">
+    </div>
+    <div class="chrome-bookmarks-content" id="bookmarks-content">
+      <!-- Bookmark items will be inserted here -->
+    </div>
+  </div>
+
   <!-- Mobile Chrome Window -->
   <div id="chrome-mobile-window" class="chrome-mobile-window">
     <!-- Mobile Top Bar -->
@@ -2742,25 +3622,179 @@
     </div>
     <div class="chrome-menu-divider"></div>
     <div class="chrome-menu-section">
-      <button class="chrome-menu-item">
+      <button class="chrome-menu-item" id="menu-history">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <span>History</span>
       </button>
-      <button class="chrome-menu-item">
+      <button class="chrome-menu-item" id="menu-downloads">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
         <span>Downloads</span>
       </button>
-      <button class="chrome-menu-item">
+      <button class="chrome-menu-item" id="menu-bookmarks">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
         <span>Bookmarks</span>
       </button>
     </div>
     <div class="chrome-menu-divider"></div>
     <div class="chrome-menu-section">
-      <button class="chrome-menu-item">
+      <button class="chrome-menu-item" id="menu-settings">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
         <span>Settings</span>
       </button>
+    </div>
+  </div>
+
+  <!-- History Panel -->
+  <div id="chrome-history-panel" class="chrome-history-panel hidden">
+    <div class="chrome-history-header">
+      <div class="chrome-history-title">History</div>
+      <button class="chrome-history-close" id="history-close-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-history-search">
+      <input type="text" class="chrome-history-search-input" id="history-search-input" placeholder="Search history...">
+    </div>
+    <div class="chrome-history-content" id="history-content">
+      <!-- History items will be inserted here -->
+    </div>
+    <div class="chrome-history-clear">
+      <button class="chrome-history-clear-btn" id="history-clear-btn">Clear browsing data</button>
+    </div>
+  </div>
+
+  <!-- Search in Page Bar -->
+  <div id="chrome-findbar" class="chrome-findbar hidden">
+    <input type="text" class="chrome-findbar-input" id="findbar-input" placeholder="Find in page">
+    <span class="chrome-findbar-count" id="findbar-count"></span>
+    <div class="chrome-findbar-buttons">
+      <button class="chrome-findbar-btn" id="findbar-prev" title="Previous">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+      </button>
+      <button class="chrome-findbar-btn" id="findbar-next" title="Next">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+    </div>
+    <button class="chrome-findbar-close" id="findbar-close">
+      <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Tab Context Menu -->
+  <div id="chrome-tab-context-menu" class="chrome-tab-context-menu hidden">
+    <button class="chrome-tab-context-item" id="context-reload">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+      </svg>
+      <span>Reload</span>
+    </button>
+    <button class="chrome-tab-context-item" id="context-duplicate">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+      </svg>
+      <span>Duplicate</span>
+    </button>
+    <div class="chrome-tab-context-divider"></div>
+    <button class="chrome-tab-context-item" id="context-pin">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+      </svg>
+      <span>Pin tab</span>
+    </button>
+    <button class="chrome-tab-context-item" id="context-mute">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+      </svg>
+      <span>Mute tab</span>
+    </button>
+    <div class="chrome-tab-context-divider"></div>
+    <button class="chrome-tab-context-item" id="context-close-others">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      <span>Close other tabs</span>
+    </button>
+    <button class="chrome-tab-context-item" id="context-close-right">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+      <span>Close tabs to the right</span>
+    </button>
+    <div class="chrome-tab-context-divider"></div>
+    <button class="chrome-tab-context-item" id="context-close">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+      <span>Close tab</span>
+    </button>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="chrome-settings-panel" class="chrome-settings-panel hidden">
+    <div class="chrome-settings-header">
+      <div class="chrome-settings-title">Settings</div>
+      <button class="chrome-settings-close" id="settings-close-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-settings-search">
+      <input type="text" class="chrome-settings-search-input" id="settings-search-input" placeholder="Search settings...">
+    </div>
+    <div class="chrome-settings-content">
+      <div class="chrome-settings-sidebar">
+        <div class="chrome-settings-category active" data-category="appearance">Appearance</div>
+        <div class="chrome-settings-category" data-category="privacy">Privacy</div>
+        <div class="chrome-settings-category" data-category="advanced">Advanced</div>
+      </div>
+      <div class="chrome-settings-main" id="settings-main">
+        <div class="chrome-settings-section" data-category="appearance">
+          <div class="chrome-settings-section-title">Appearance</div>
+          <div class="chrome-settings-item">
+            <div class="chrome-settings-item-label">
+              <div class="chrome-settings-item-title">Show bookmarks bar</div>
+              <div class="chrome-settings-item-desc">Always show the bookmarks bar</div>
+            </div>
+            <button class="chrome-settings-toggle active" data-setting="show-bookmarks"></button>
+          </div>
+          <div class="chrome-settings-item">
+            <div class="chrome-settings-item-label">
+              <div class="chrome-settings-item-title">Compact mode</div>
+              <div class="chrome-settings-item-desc">Use compact tab design</div>
+            </div>
+            <button class="chrome-settings-toggle" data-setting="compact-mode"></button>
+          </div>
+        </div>
+        <div class="chrome-settings-section hidden" data-category="privacy">
+          <div class="chrome-settings-section-title">Privacy</div>
+          <div class="chrome-settings-item">
+            <div class="chrome-settings-item-label">
+              <div class="chrome-settings-item-title">Clear browsing data</div>
+              <div class="chrome-settings-item-desc">Clear cookies, cache, and history</div>
+            </div>
+            <button class="chrome-history-clear-btn" id="settings-clear-data">Clear</button>
+          </div>
+        </div>
+        <div class="chrome-settings-section hidden" data-category="advanced">
+          <div class="chrome-settings-section-title">Advanced</div>
+          <div class="chrome-settings-item">
+            <div class="chrome-settings-item-label">
+              <div class="chrome-settings-item-title">Developer mode</div>
+              <div class="chrome-settings-item-desc">Enable advanced developer features</div>
+            </div>
+            <button class="chrome-settings-toggle" data-setting="dev-mode"></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2771,6 +3805,12 @@
         this.history = ['bunchhieng.github.io'];
         this.currentIndex = 0;
         this.isFullscreen = false;
+        this.browsingHistory = this.loadBrowsingHistory();
+        this.findMatches = [];
+        this.currentFindIndex = -1;
+        this.contextMenuTab = null;
+        this.downloads = this.loadDownloads();
+        this.bookmarks = this.loadBookmarks();
         this.init();
       }
 
@@ -2778,6 +3818,11 @@
         this.attachEventListeners();
         this.updateNavigationButtons();
         this.initializeAnimations();
+        // Initialize sample downloads if empty
+        if (this.downloads.length === 0) {
+          this.addDownload('portfolio-resume.pdf', 'https://example.com/resume.pdf', '2.4 MB');
+          this.addDownload('project-screenshot.png', 'https://example.com/screenshot.png', '1.2 MB');
+        }
       }
 
       attachEventListeners() {
@@ -2870,6 +3915,94 @@
         // New tab button
         const newTabBtn = document.querySelector('.chrome-new-tab-btn');
         newTabBtn?.addEventListener('click', () => this.newTab());
+
+        // Bookmark bar
+        const bookmarks = document.querySelectorAll('.chrome-bookmark');
+        bookmarks.forEach(bookmark => {
+          bookmark.addEventListener('click', (e) => {
+            const url = bookmark.dataset.url;
+            const tabType = bookmark.dataset.tab;
+
+            if (tabType) {
+              // Switch to the specified tab
+              this.switchTab(tabType);
+            } else if (url) {
+              // Open external URL
+              if (url.startsWith('mailto:')) {
+                window.location.href = url;
+              } else {
+                window.open(url, '_blank', 'noopener,noreferrer');
+              }
+            }
+          });
+        });
+
+        // History panel
+        const historyMenuItem = document.getElementById('menu-history');
+        historyMenuItem?.addEventListener('click', () => this.openHistory());
+        document.getElementById('history-close-btn')?.addEventListener('click', () => this.closeHistory());
+        document.getElementById('history-search-input')?.addEventListener('input', (e) => this.searchHistory(e.target.value));
+        document.getElementById('history-clear-btn')?.addEventListener('click', () => this.clearHistory());
+
+        // Search in page (Ctrl+F / Cmd+F)
+        document.addEventListener('keydown', (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+            e.preventDefault();
+            this.openFindBar();
+          }
+          if (e.key === 'Escape' && !document.getElementById('chrome-findbar')?.classList.contains('hidden')) {
+            this.closeFindBar();
+          }
+        });
+        document.getElementById('findbar-close')?.addEventListener('click', () => this.closeFindBar());
+        document.getElementById('findbar-input')?.addEventListener('input', (e) => this.findInPage(e.target.value));
+        document.getElementById('findbar-prev')?.addEventListener('click', () => this.findPrevious());
+        document.getElementById('findbar-next')?.addEventListener('click', () => this.findNext());
+
+        // Tab context menu - use event delegation for dynamically created tabs
+        document.querySelector('.chrome-tabs')?.addEventListener('contextmenu', (e) => {
+          const tab = e.target.closest('.chrome-tab');
+          if (tab) {
+            e.preventDefault();
+            this.showTabContextMenu(e, tab);
+          }
+        });
+        document.getElementById('context-reload')?.addEventListener('click', () => this.contextReload());
+        document.getElementById('context-duplicate')?.addEventListener('click', () => this.contextDuplicate());
+        document.getElementById('context-pin')?.addEventListener('click', () => this.contextPin());
+        document.getElementById('context-mute')?.addEventListener('click', () => this.contextMute());
+        document.getElementById('context-close-others')?.addEventListener('click', () => this.contextCloseOthers());
+        document.getElementById('context-close-right')?.addEventListener('click', () => this.contextCloseRight());
+        document.getElementById('context-close')?.addEventListener('click', () => this.contextClose());
+        document.addEventListener('click', (e) => {
+          const contextMenu = document.getElementById('chrome-tab-context-menu');
+          if (contextMenu && !contextMenu.contains(e.target)) {
+            contextMenu.classList.add('hidden');
+          }
+        });
+
+        // Settings panel
+        const settingsMenuItem = document.getElementById('menu-settings');
+        settingsMenuItem?.addEventListener('click', () => this.openSettings());
+        document.getElementById('settings-close-btn')?.addEventListener('click', () => this.closeSettings());
+        document.querySelectorAll('.chrome-settings-category').forEach(cat => {
+          cat.addEventListener('click', () => this.switchSettingsCategory(cat.dataset.category));
+        });
+        document.querySelectorAll('.chrome-settings-toggle').forEach(toggle => {
+          toggle.addEventListener('click', () => this.toggleSetting(toggle.dataset.setting));
+        });
+        document.getElementById('settings-clear-data')?.addEventListener('click', () => this.clearHistory());
+
+        // Downloads panel
+        const downloadsMenuItem = document.getElementById('menu-downloads');
+        downloadsMenuItem?.addEventListener('click', () => this.openDownloads());
+        document.getElementById('downloads-close-btn')?.addEventListener('click', () => this.closeDownloads());
+
+        // Bookmarks panel
+        const bookmarksMenuItem = document.getElementById('menu-bookmarks');
+        bookmarksMenuItem?.addEventListener('click', () => this.openBookmarks());
+        document.getElementById('bookmarks-close-btn')?.addEventListener('click', () => this.closeBookmarks());
+        document.getElementById('bookmarks-search-input')?.addEventListener('input', (e) => this.searchBookmarks(e.target.value));
 
         // Star/bookmark button
         const starBtn = document.querySelector('.chrome-star-btn');
@@ -3041,7 +4174,39 @@
       // Menu methods
       toggleMenu() {
         const menuDropdown = document.getElementById('chrome-menu-dropdown');
-        menuDropdown?.classList.toggle('hidden');
+        const menuBtn = document.getElementById('menu-btn');
+        
+        if (!menuDropdown || !menuBtn) return;
+        
+        if (menuDropdown.classList.contains('hidden')) {
+          // Calculate position relative to menu button
+          const buttonRect = menuBtn.getBoundingClientRect();
+          const dropdownWidth = 320; // Menu width
+          const dropdownHeight = menuDropdown.offsetHeight || 400; // Approximate height
+          
+          // Position dropdown below and aligned to the right edge of button
+          let left = buttonRect.right - dropdownWidth;
+          let top = buttonRect.bottom + 4; // 4px gap
+          
+          // Ensure dropdown doesn't go off screen
+          if (left < 12) {
+            left = 12; // Minimum margin from left
+          }
+          if (left + dropdownWidth > window.innerWidth - 12) {
+            left = window.innerWidth - dropdownWidth - 12; // Minimum margin from right
+          }
+          
+          // If dropdown would go off bottom, position above button
+          if (top + dropdownHeight > window.innerHeight - 12) {
+            top = buttonRect.top - dropdownHeight - 4;
+          }
+          
+          menuDropdown.style.left = `${left}px`;
+          menuDropdown.style.top = `${top}px`;
+          menuDropdown.classList.remove('hidden');
+        } else {
+          menuDropdown.classList.add('hidden');
+        }
       }
 
       closeMenu() {
@@ -3067,6 +4232,7 @@
           portfolioContent?.classList.remove('hidden');
           blogContent?.classList.add('hidden');
           this.updateURL();
+          this.addToHistory('bunchhieng.github.io', 'Portfolio - Bunchhieng Soth');
         } else if (tabType === 'blog') {
           portfolioContent?.classList.add('hidden');
           blogContent?.classList.remove('hidden');
@@ -3074,6 +4240,7 @@
           if (urlInput) {
             urlInput.value = 'bunchhieng.github.io/blog';
           }
+          this.addToHistory('bunchhieng.github.io/blog', 'Blog - Bunchhieng Soth');
         }
       }
 
@@ -3154,14 +4321,23 @@
       // Bookmark methods
       toggleBookmark() {
         const starBtn = document.querySelector('.chrome-star-btn');
-        const isBookmarked = starBtn?.classList.contains('bookmarked');
-
-        starBtn?.classList.toggle('bookmarked');
-
-        if (isBookmarked) {
-          this.showNotification('Bookmark removed');
+        const urlInput = document.getElementById('url-input');
+        const currentUrl = urlInput?.value || 'bunchhieng.github.io';
+        const currentTitle = document.title || 'Portfolio - Bunchhieng Soth';
+        
+        // Check if already bookmarked
+        const existing = this.bookmarks.find(b => b.url === currentUrl);
+        
+        if (existing) {
+          this.removeBookmark(existing.id);
+          if (starBtn) {
+            starBtn.classList.remove('bookmarked');
+          }
         } else {
-          this.showNotification('Page bookmarked');
+          this.addBookmark(currentTitle, currentUrl);
+          if (starBtn) {
+            starBtn.classList.add('bookmarked');
+          }
         }
       }
 
@@ -3230,6 +4406,554 @@
           restoreBtn.remove();
         };
         document.body.appendChild(restoreBtn);
+      }
+
+      // History methods
+      loadBrowsingHistory() {
+        const saved = localStorage.getItem('chrome-browsing-history');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return [];
+      }
+
+      saveBrowsingHistory() {
+        localStorage.setItem('chrome-browsing-history', JSON.stringify(this.browsingHistory));
+      }
+
+      addToHistory(url, title) {
+        this.browsingHistory.unshift({
+          url,
+          title: title || url,
+          timestamp: Date.now()
+        });
+        if (this.browsingHistory.length > 100) {
+          this.browsingHistory = this.browsingHistory.slice(0, 100);
+        }
+        this.saveBrowsingHistory();
+      }
+
+      openHistory() {
+        const panel = document.getElementById('chrome-history-panel');
+        panel?.classList.remove('hidden');
+        this.renderHistory();
+      }
+
+      closeHistory() {
+        const panel = document.getElementById('chrome-history-panel');
+        panel?.classList.add('hidden');
+      }
+
+      renderHistory(filter = '') {
+        const content = document.getElementById('history-content');
+        if (!content) return;
+
+        let filtered = this.browsingHistory;
+        if (filter) {
+          const filterLower = filter.toLowerCase();
+          filtered = this.browsingHistory.filter(item => 
+            item.title.toLowerCase().includes(filterLower) || 
+            item.url.toLowerCase().includes(filterLower)
+          );
+        }
+
+        if (filtered.length === 0) {
+          content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--chrome-text-secondary);">No history found</div>';
+          return;
+        }
+
+        content.innerHTML = filtered.map(item => {
+          const date = new Date(item.timestamp);
+          const timeStr = date.toLocaleString();
+          return `
+            <div class="chrome-history-item" data-url="${item.url}">
+              <div class="chrome-history-item-icon">
+                <svg fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <div class="chrome-history-item-details">
+                <div class="chrome-history-item-title">${item.title}</div>
+                <div class="chrome-history-item-url">${item.url}</div>
+              </div>
+              <div class="chrome-history-item-time">${timeStr}</div>
+            </div>
+          `;
+        }).join('');
+
+        content.querySelectorAll('.chrome-history-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const url = item.dataset.url;
+            if (url.startsWith('http')) {
+              window.open(url, '_blank');
+            } else if (url.includes('blog')) {
+              this.switchTab('blog');
+              this.closeHistory();
+            } else {
+              this.switchTab('portfolio');
+              this.closeHistory();
+            }
+          });
+        });
+      }
+
+      searchHistory(query) {
+        this.renderHistory(query);
+      }
+
+      clearHistory() {
+        if (confirm('Clear all browsing history?')) {
+          this.browsingHistory = [];
+          this.saveBrowsingHistory();
+          this.renderHistory();
+          this.showNotification('History cleared');
+        }
+      }
+
+      // Search in page methods
+      openFindBar() {
+        const findbar = document.getElementById('chrome-findbar');
+        findbar?.classList.remove('hidden');
+        const input = document.getElementById('findbar-input');
+        input?.focus();
+        input?.select();
+      }
+
+      closeFindBar() {
+        const findbar = document.getElementById('chrome-findbar');
+        findbar?.classList.add('hidden');
+        this.clearFindHighlights();
+      }
+
+      findInPage(query) {
+        if (!query) {
+          this.clearFindHighlights();
+          document.getElementById('findbar-count').textContent = '';
+          return;
+        }
+
+        const contentArea = document.getElementById('content-area');
+        if (!contentArea) return;
+
+        this.clearFindHighlights();
+        this.findMatches = [];
+        this.currentFindIndex = -1;
+
+        const walker = document.createTreeWalker(
+          contentArea,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+
+        let node;
+        while (node = walker.nextNode()) {
+          const text = node.textContent;
+          const index = text.toLowerCase().indexOf(query.toLowerCase());
+          if (index !== -1) {
+            const range = document.createRange();
+            range.setStart(node, index);
+            range.setEnd(node, index + query.length);
+            this.findMatches.push(range);
+          }
+        }
+
+        if (this.findMatches.length > 0) {
+          this.currentFindIndex = 0;
+          this.highlightMatch(0);
+        }
+
+        const count = document.getElementById('findbar-count');
+        if (count) {
+          count.textContent = this.findMatches.length > 0 
+            ? `${this.currentFindIndex + 1} of ${this.findMatches.length}`
+            : 'No matches';
+        }
+      }
+
+      highlightMatch(index) {
+        if (index < 0 || index >= this.findMatches.length) return;
+        this.clearFindHighlights();
+        const range = this.findMatches[index];
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        range.startContainer.parentElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      clearFindHighlights() {
+        window.getSelection().removeAllRanges();
+      }
+
+      findPrevious() {
+        if (this.findMatches.length === 0) return;
+        this.currentFindIndex = (this.currentFindIndex - 1 + this.findMatches.length) % this.findMatches.length;
+        this.highlightMatch(this.currentFindIndex);
+        const count = document.getElementById('findbar-count');
+        if (count) {
+          count.textContent = `${this.currentFindIndex + 1} of ${this.findMatches.length}`;
+        }
+      }
+
+      findNext() {
+        if (this.findMatches.length === 0) return;
+        this.currentFindIndex = (this.currentFindIndex + 1) % this.findMatches.length;
+        this.highlightMatch(this.currentFindIndex);
+        const count = document.getElementById('findbar-count');
+        if (count) {
+          count.textContent = `${this.currentFindIndex + 1} of ${this.findMatches.length}`;
+        }
+      }
+
+      // Tab context menu methods
+      showTabContextMenu(e, tab) {
+        const menu = document.getElementById('chrome-tab-context-menu');
+        if (!menu) return;
+        this.contextMenuTab = tab;
+        menu.style.left = `${e.pageX}px`;
+        menu.style.top = `${e.pageY}px`;
+        menu.classList.remove('hidden');
+        const pinBtn = document.getElementById('context-pin');
+        if (pinBtn) {
+          pinBtn.textContent = tab.classList.contains('pinned') ? 'Unpin tab' : 'Pin tab';
+        }
+      }
+
+      contextReload() {
+        this.refresh();
+        this.hideContextMenu();
+      }
+
+      contextDuplicate() {
+        const tabType = this.contextMenuTab?.dataset.tab;
+        if (tabType === 'blog') {
+          this.switchTab('blog');
+        } else {
+          this.switchTab('portfolio');
+        }
+        this.hideContextMenu();
+      }
+
+      contextPin() {
+        if (!this.contextMenuTab) return;
+        this.contextMenuTab.classList.toggle('pinned');
+        this.showNotification(this.contextMenuTab.classList.contains('pinned') ? 'Tab pinned' : 'Tab unpinned');
+        this.hideContextMenu();
+      }
+
+      contextMute() {
+        this.showNotification('Tab muted');
+        this.hideContextMenu();
+      }
+
+      contextCloseOthers() {
+        this.showNotification('Other tabs closed');
+        this.hideContextMenu();
+      }
+
+      contextCloseRight() {
+        this.showNotification('Tabs to the right closed');
+        this.hideContextMenu();
+      }
+
+      contextClose() {
+        const tabType = this.contextMenuTab?.dataset.tab;
+        if (tabType && tabType !== 'portfolio' && tabType !== 'blog') {
+          this.closeTab(tabType);
+        }
+        this.hideContextMenu();
+      }
+
+      hideContextMenu() {
+        const menu = document.getElementById('chrome-tab-context-menu');
+        menu?.classList.add('hidden');
+        this.contextMenuTab = null;
+      }
+
+      // Settings methods
+      openSettings() {
+        const panel = document.getElementById('chrome-settings-panel');
+        panel?.classList.remove('hidden');
+        this.closeMenu();
+      }
+
+      closeSettings() {
+        const panel = document.getElementById('chrome-settings-panel');
+        panel?.classList.add('hidden');
+      }
+
+      switchSettingsCategory(category) {
+        document.querySelectorAll('.chrome-settings-category').forEach(cat => {
+          cat.classList.toggle('active', cat.dataset.category === category);
+        });
+        document.querySelectorAll('.chrome-settings-section').forEach(section => {
+          section.classList.toggle('hidden', section.dataset.category !== category);
+        });
+      }
+
+      toggleSetting(setting) {
+        const toggle = document.querySelector(`[data-setting="${setting}"]`);
+        if (!toggle) return;
+        toggle.classList.toggle('active');
+        const isActive = toggle.classList.contains('active');
+        switch(setting) {
+          case 'show-bookmarks':
+            const bookmarkBar = document.getElementById('bookmark-bar');
+            if (bookmarkBar) {
+              bookmarkBar.style.display = isActive ? 'flex' : 'none';
+            }
+            this.showNotification(isActive ? 'Bookmarks bar shown' : 'Bookmarks bar hidden');
+            break;
+          case 'compact-mode':
+            this.showNotification(isActive ? 'Compact mode enabled' : 'Compact mode disabled');
+            break;
+          case 'dev-mode':
+            this.showNotification(isActive ? 'Developer mode enabled' : 'Developer mode disabled');
+            break;
+        }
+      }
+
+      // Downloads methods
+      loadDownloads() {
+        const saved = localStorage.getItem('chrome-downloads');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return [];
+      }
+
+      saveDownloads() {
+        localStorage.setItem('chrome-downloads', JSON.stringify(this.downloads));
+      }
+
+      addDownload(name, url, size) {
+        this.downloads.unshift({
+          id: Date.now(),
+          name,
+          url,
+          size: size || 'Unknown',
+          timestamp: Date.now(),
+          status: 'completed',
+          progress: 100
+        });
+        if (this.downloads.length > 50) {
+          this.downloads = this.downloads.slice(0, 50);
+        }
+        this.saveDownloads();
+        this.renderDownloads();
+      }
+
+      openDownloads() {
+        const panel = document.getElementById('chrome-downloads-panel');
+        panel?.classList.remove('hidden');
+        this.renderDownloads();
+        this.closeMenu();
+      }
+
+      closeDownloads() {
+        const panel = document.getElementById('chrome-downloads-panel');
+        panel?.classList.add('hidden');
+      }
+
+      renderDownloads() {
+        const content = document.getElementById('downloads-content');
+        if (!content) return;
+
+        if (this.downloads.length === 0) {
+          content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--chrome-text-secondary);">No downloads yet</div>';
+          return;
+        }
+
+        content.innerHTML = this.downloads.map(download => {
+          const date = new Date(download.timestamp);
+          const timeStr = date.toLocaleString();
+          const fileIcon = this.getFileIcon(download.name);
+          return `
+            <div class="chrome-download-item" data-url="${download.url}">
+              <div class="chrome-download-icon">${fileIcon}</div>
+              <div class="chrome-download-details">
+                <div class="chrome-download-name">${download.name}</div>
+                <div class="chrome-download-info">
+                  <span>${download.size}</span>
+                  <span>·</span>
+                  <span>${timeStr}</span>
+                </div>
+              </div>
+              <div class="chrome-download-actions">
+                <button class="chrome-download-btn" title="Open" onclick="event.stopPropagation(); window.open('${download.url}', '_blank')">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </button>
+                <button class="chrome-download-btn" title="Remove" onclick="event.stopPropagation(); chromeBrowser.removeDownload(${download.id})">
+                  <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        content.querySelectorAll('.chrome-download-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const url = item.dataset.url;
+            if (url) {
+              window.open(url, '_blank');
+            }
+          });
+        });
+      }
+
+      getFileIcon(filename) {
+        const ext = filename.split('.').pop()?.toLowerCase();
+        const icons = {
+          pdf: '<svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>',
+          zip: '<svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M14,17H7V15H14M17,13H7V11H17M17,9H7V7H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"/></svg>',
+          image: '<svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/></svg>'
+        };
+        if (['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(ext)) {
+          return icons.image;
+        }
+        if (['zip', 'rar', '7z'].includes(ext)) {
+          return icons.zip;
+        }
+        if (ext === 'pdf') {
+          return icons.pdf;
+        }
+        return '<svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>';
+      }
+
+      removeDownload(id) {
+        this.downloads = this.downloads.filter(d => d.id !== id);
+        this.saveDownloads();
+        this.renderDownloads();
+        this.showNotification('Download removed');
+      }
+
+      // Bookmarks methods
+      loadBookmarks() {
+        const saved = localStorage.getItem('chrome-bookmarks');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        // Default bookmarks from bookmark bar
+        return [
+          { id: 1, name: 'GitHub', url: 'https://github.com/Bunchhieng', timestamp: Date.now() },
+          { id: 2, name: 'LinkedIn', url: 'https://www.linkedin.com/in/bunchhieng/', timestamp: Date.now() },
+          { id: 3, name: 'Email', url: 'mailto:bunchhieng@gmail.com', timestamp: Date.now() },
+          { id: 4, name: 'Blog', url: 'bunchhieng.github.io/blog', timestamp: Date.now() },
+          { id: 5, name: 'SportsCard360', url: 'https://sportscard360.com', timestamp: Date.now() }
+        ];
+      }
+
+      saveBookmarks() {
+        localStorage.setItem('chrome-bookmarks', JSON.stringify(this.bookmarks));
+      }
+
+      addBookmark(name, url) {
+        this.bookmarks.unshift({
+          id: Date.now(),
+          name,
+          url,
+          timestamp: Date.now()
+        });
+        this.saveBookmarks();
+        this.renderBookmarks();
+        this.showNotification('Bookmark added');
+      }
+
+      removeBookmark(id) {
+        this.bookmarks = this.bookmarks.filter(b => b.id !== id);
+        this.saveBookmarks();
+        this.renderBookmarks();
+        this.showNotification('Bookmark removed');
+      }
+
+      openBookmarks() {
+        const panel = document.getElementById('chrome-bookmarks-panel');
+        panel?.classList.remove('hidden');
+        this.renderBookmarks();
+        this.closeMenu();
+      }
+
+      closeBookmarks() {
+        const panel = document.getElementById('chrome-bookmarks-panel');
+        panel?.classList.add('hidden');
+      }
+
+      renderBookmarks(filter = '') {
+        const content = document.getElementById('bookmarks-content');
+        if (!content) return;
+
+        let filtered = this.bookmarks;
+        if (filter) {
+          const filterLower = filter.toLowerCase();
+          filtered = this.bookmarks.filter(bookmark => 
+            bookmark.name.toLowerCase().includes(filterLower) || 
+            bookmark.url.toLowerCase().includes(filterLower)
+          );
+        }
+
+        if (filtered.length === 0) {
+          content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--chrome-text-secondary);">No bookmarks found</div>';
+          return;
+        }
+
+        content.innerHTML = filtered.map(bookmark => {
+          const date = new Date(bookmark.timestamp);
+          const timeStr = date.toLocaleDateString();
+          return `
+            <div class="chrome-bookmark-item" data-url="${bookmark.url}">
+              <div class="chrome-bookmark-icon">
+                <svg fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"/>
+                </svg>
+              </div>
+              <div class="chrome-bookmark-details">
+                <div class="chrome-bookmark-name">${bookmark.name}</div>
+                <div class="chrome-bookmark-url">${bookmark.url}</div>
+              </div>
+              <div class="chrome-bookmark-actions">
+                <button class="chrome-bookmark-action-btn" title="Open" onclick="event.stopPropagation(); chromeBrowser.openBookmark('${bookmark.url}')">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </button>
+                <button class="chrome-bookmark-action-btn" title="Delete" onclick="event.stopPropagation(); chromeBrowser.removeBookmark(${bookmark.id})">
+                  <svg fill="currentColor" viewBox="0 0 20 20" width="14" height="14">
+                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        content.querySelectorAll('.chrome-bookmark-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const url = item.dataset.url;
+            this.openBookmark(url);
+          });
+        });
+      }
+
+      openBookmark(url) {
+        if (url.startsWith('mailto:')) {
+          window.location.href = url;
+        } else if (url.includes('blog')) {
+          this.switchTab('blog');
+          this.closeBookmarks();
+        } else if (url.startsWith('http')) {
+          window.open(url, '_blank');
+        } else {
+          this.switchTab('portfolio');
+          this.closeBookmarks();
+        }
+      }
+
+      searchBookmarks(query) {
+        this.renderBookmarks(query);
       }
     }
 
