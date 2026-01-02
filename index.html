@@ -7,7 +7,7 @@
   <!-- Primary Meta Tags -->
   <title>Bunchhieng Soth | Full-Stack Software Engineer | Klaviyo</title>
   <meta name="title" content="Bunchhieng Soth | Full-Stack Software Engineer | Klaviyo">
-  <meta name="description" content="Full-stack software engineer at Klaviyo building scalable web applications, blockchain infrastructure, and developer tools. Open source contributor with 23+ repositories and 546+ GitHub stars. Specialized in TypeScript, React, Next.js, Go, Rust, and CosmWasm.">
+  <meta name="description" content="Full-stack software engineer at Klaviyo building scalable web applications, blockchain infrastructure, and developer tools. Open source contributor with multiple repositories. Specialized in TypeScript, React, Next.js, Go, Rust, and CosmWasm.">
   <meta name="keywords" content="Bunchhieng Soth, software engineer, full-stack developer, Klaviyo, TypeScript, React, Next.js, Go, Rust, blockchain, CosmWasm, open source, portfolio, web developer, Boston">
   <meta name="author" content="Bunchhieng Soth">
   <meta name="robots" content="index, follow">
@@ -320,11 +320,130 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .chrome-url-icon:hover {
+      color: var(--chrome-text);
     }
 
     .chrome-url-icon svg {
       width: 16px;
       height: 16px;
+    }
+
+    /* Site Information Popup */
+    .chrome-site-info-popup {
+      position: fixed;
+      background: var(--chrome-surface);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      z-index: 2000;
+      min-width: 320px;
+      max-width: 400px;
+      overflow: hidden;
+      border: 1px solid var(--chrome-border);
+    }
+
+    .chrome-site-info-popup.hidden {
+      display: none;
+    }
+
+    .chrome-site-info-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-site-info-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-site-info-close {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-site-info-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-site-info-content {
+      padding: 8px 0;
+    }
+
+    .chrome-site-info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .chrome-site-info-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .chrome-site-info-item-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chrome-site-info-item-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .chrome-site-info-item-text {
+      flex: 1;
+      font-size: 14px;
+      color: var(--chrome-text);
+    }
+
+    .chrome-site-info-item-arrow {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--chrome-text-secondary);
+    }
+
+    .chrome-site-info-item-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .chrome-site-info-divider {
+      height: 1px;
+      background: var(--chrome-border);
+      margin: 4px 0;
+    }
+
+    .chrome-site-info-description {
+      padding: 12px 20px;
+      font-size: 13px;
+      color: var(--chrome-text-secondary);
+      line-height: 1.5;
     }
 
     .chrome-url-input {
@@ -1838,6 +1957,264 @@
       color: var(--chrome-text);
     }
 
+    /* Extensions Panel */
+    .chrome-extensions-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 1000px;
+      max-height: 85vh;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chrome-extensions-panel.hidden {
+      display: none;
+    }
+
+    .chrome-extensions-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chrome-extensions-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--chrome-text);
+    }
+
+    .chrome-extensions-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chrome-extensions-close:hover {
+      background: var(--chrome-surface-variant);
+      color: var(--chrome-text);
+    }
+
+    .chrome-extensions-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--chrome-border);
+      padding: 0 20px;
+      gap: 24px;
+    }
+
+    .chrome-extensions-tab {
+      padding: 16px 0;
+      background: transparent;
+      border: none;
+      color: var(--chrome-text-secondary);
+      font-size: 14px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .chrome-extensions-tab:hover {
+      color: var(--chrome-text);
+    }
+
+    .chrome-extensions-tab.active {
+      color: var(--chrome-accent);
+      border-bottom-color: var(--chrome-accent);
+    }
+
+    .chrome-extensions-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .chrome-extensions-section {
+      margin-bottom: 32px;
+    }
+
+    .chrome-extensions-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--chrome-text);
+      margin-bottom: 16px;
+    }
+
+    .chrome-extension-card {
+      background: var(--chrome-surface-variant);
+      border: 1px solid var(--chrome-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+
+    .chrome-extension-card:hover {
+      border-color: var(--chrome-accent);
+      background: #3c3d40;
+    }
+
+    .chrome-extension-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: var(--chrome-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 24px;
+    }
+
+    .chrome-extension-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chrome-extension-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .chrome-extension-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--chrome-text);
+      margin-bottom: 4px;
+    }
+
+    .chrome-extension-version {
+      font-size: 12px;
+      color: var(--chrome-text-secondary);
+    }
+
+    .chrome-extension-description {
+      font-size: 13px;
+      color: var(--chrome-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .chrome-extension-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chrome-extension-toggle {
+      width: 44px;
+      height: 24px;
+      background: var(--chrome-surface);
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .chrome-extension-toggle.enabled {
+      background: var(--chrome-accent);
+    }
+
+    .chrome-extension-toggle::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+
+    .chrome-extension-toggle.enabled::after {
+      transform: translateX(20px);
+    }
+
+    .chrome-extension-btn {
+      padding: 6px 12px;
+      background: var(--chrome-surface);
+      border: 1px solid var(--chrome-border);
+      border-radius: 6px;
+      color: var(--chrome-text);
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .chrome-extension-btn:hover {
+      background: var(--chrome-surface-variant);
+      border-color: var(--chrome-accent);
+    }
+
+    .chrome-extension-btn.danger {
+      color: #f48771;
+    }
+
+    .chrome-extension-btn.danger:hover {
+      background: rgba(244, 135, 113, 0.1);
+      border-color: #f48771;
+    }
+
+    .chrome-extension-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px;
+    }
+
+    .chrome-extension-toolbar-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .chrome-extension-toolbar-icon:hover {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-extension-toolbar-icon.active {
+      background: var(--chrome-surface-variant);
+    }
+
+    .chrome-extension-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 8px;
+      height: 8px;
+      background: #f48771;
+      border-radius: 50%;
+      border: 2px solid var(--chrome-surface);
+    }
+
     /* Search in Page Bar */
     .chrome-findbar {
       position: fixed;
@@ -2590,7 +2967,7 @@
       <!-- Address Bar -->
       <div class="chrome-addressbar-container">
         <div class="chrome-addressbar">
-          <div class="chrome-url-icon">
+          <div class="chrome-url-icon" id="site-info-icon" title="Site information">
             <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
           </div>
           <input
@@ -2779,23 +3156,6 @@
               Full-stack engineer building scalable web applications, blockchain infrastructure, and developer tools.
             </p>
 
-            <!-- Stats & Tags -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <div class="flex items-center gap-6 text-sm text-gray-500">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                  </svg>
-                  <span>546 stars</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                  </svg>
-                  <span>23 repos</span>
-                </div>
-              </div>
-            </div>
 
           </div>
         </div>
@@ -3410,6 +3770,96 @@
     </div>
   </div>
 
+  <!-- Extensions Panel -->
+  <div id="chrome-extensions-panel" class="chrome-extensions-panel hidden">
+    <div class="chrome-extensions-header">
+      <div class="chrome-extensions-title">Extensions</div>
+      <button class="chrome-extensions-close" id="extensions-close-btn">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-extensions-tabs">
+      <button class="chrome-extensions-tab active" data-tab="installed">Installed</button>
+      <button class="chrome-extensions-tab" data-tab="available">Available</button>
+    </div>
+    <div class="chrome-extensions-content" id="extensions-content">
+      <!-- Extensions will be rendered here -->
+    </div>
+  </div>
+
+  <!-- Site Information Popup -->
+  <div id="chrome-site-info-popup" class="chrome-site-info-popup hidden">
+    <div class="chrome-site-info-header">
+      <div class="chrome-site-info-title" id="site-info-domain">bunchhieng.github.io</div>
+      <button class="chrome-site-info-close" id="site-info-close">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chrome-site-info-content">
+      <div class="chrome-site-info-item" id="site-info-connection">
+        <div class="chrome-site-info-item-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="chrome-site-info-item-text">Connection is secure</div>
+        <div class="chrome-site-info-item-arrow">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="chrome-site-info-item" id="site-info-cookies">
+        <div class="chrome-site-info-item-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+          </svg>
+        </div>
+        <div class="chrome-site-info-item-text">Cookies and site data</div>
+        <div class="chrome-site-info-item-arrow">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="chrome-site-info-item" id="site-info-settings">
+        <div class="chrome-site-info-item-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <div class="chrome-site-info-item-text">Site settings</div>
+        <div class="chrome-site-info-item-arrow">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="chrome-site-info-divider"></div>
+      <div class="chrome-site-info-item" id="site-info-about">
+        <div class="chrome-site-info-item-icon">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="chrome-site-info-item-text">About this page</div>
+        <div class="chrome-site-info-item-arrow">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="chrome-site-info-description" id="site-info-description">
+        Portfolio website for Bunchhieng Soth, a full-stack software engineer building scalable web applications, blockchain infrastructure, and developer tools.
+      </div>
+    </div>
+  </div>
+
   <!-- Mobile Chrome Window -->
   <div id="chrome-mobile-window" class="chrome-mobile-window">
     <!-- Mobile Top Bar -->
@@ -3634,6 +4084,10 @@
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
         <span>Bookmarks</span>
       </button>
+      <button class="chrome-menu-item" id="menu-extensions">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+        <span>Extensions</span>
+      </button>
     </div>
     <div class="chrome-menu-divider"></div>
     <div class="chrome-menu-section">
@@ -3811,6 +4265,8 @@
         this.contextMenuTab = null;
         this.downloads = this.loadDownloads();
         this.bookmarks = this.loadBookmarks();
+        this.extensions = this.loadExtensions();
+        this.availableExtensions = this.getAvailableExtensions();
         this.init();
       }
 
@@ -3823,6 +4279,8 @@
           this.addDownload('portfolio-resume.pdf', 'https://example.com/resume.pdf', '2.4 MB');
           this.addDownload('project-screenshot.png', 'https://example.com/screenshot.png', '1.2 MB');
         }
+        // Update extension toolbar
+        this.updateExtensionToolbar();
       }
 
       attachEventListeners() {
@@ -4004,6 +4462,16 @@
         document.getElementById('bookmarks-close-btn')?.addEventListener('click', () => this.closeBookmarks());
         document.getElementById('bookmarks-search-input')?.addEventListener('input', (e) => this.searchBookmarks(e.target.value));
 
+        // Extensions panel
+        const extensionsBtn = document.getElementById('extensions-btn');
+        extensionsBtn?.addEventListener('click', () => this.openExtensions());
+        const extensionsMenuItem = document.getElementById('menu-extensions');
+        extensionsMenuItem?.addEventListener('click', () => this.openExtensions());
+        document.getElementById('extensions-close-btn')?.addEventListener('click', () => this.closeExtensions());
+        document.querySelectorAll('.chrome-extensions-tab').forEach(tab => {
+          tab.addEventListener('click', () => this.switchExtensionsTab(tab.dataset.tab));
+        });
+
         // Star/bookmark button
         const starBtn = document.querySelector('.chrome-star-btn');
         starBtn?.addEventListener('click', () => this.toggleBookmark());
@@ -4012,6 +4480,48 @@
         const urlInput = document.getElementById('url-input');
         urlInput?.addEventListener('click', function() {
           this.select();
+        });
+
+        // Site information popup
+        const siteInfoIcon = document.getElementById('site-info-icon');
+        const siteInfoPopup = document.getElementById('chrome-site-info-popup');
+        const siteInfoClose = document.getElementById('site-info-close');
+        
+        siteInfoIcon?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.showSiteInfo(e);
+        });
+        
+        siteInfoClose?.addEventListener('click', () => {
+          this.hideSiteInfo();
+        });
+        
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+          if (siteInfoPopup && !siteInfoPopup.contains(e.target) && !siteInfoIcon?.contains(e.target)) {
+            this.hideSiteInfo();
+          }
+        });
+        
+        // Site info menu items
+        document.getElementById('site-info-connection')?.addEventListener('click', () => {
+          this.showNotification('Connection is secure');
+          this.hideSiteInfo();
+        });
+        
+        document.getElementById('site-info-cookies')?.addEventListener('click', () => {
+          this.showNotification('Cookies and site data');
+          this.hideSiteInfo();
+        });
+        
+        document.getElementById('site-info-settings')?.addEventListener('click', () => {
+          this.openSettings();
+          this.hideSiteInfo();
+        });
+        
+        document.getElementById('site-info-about')?.addEventListener('click', () => {
+          this.showNotification('About this page');
+          this.hideSiteInfo();
         });
 
         // Keyboard shortcuts
@@ -4954,6 +5464,288 @@
 
       searchBookmarks(query) {
         this.renderBookmarks(query);
+      }
+
+      // Extensions methods
+      getAvailableExtensions() {
+        return [
+          {
+            id: 'adblock',
+            name: 'AdBlock',
+            version: '5.2.1',
+            description: 'Block ads and pop-ups on websites. Improve your browsing experience.',
+            icon: '🚫',
+            author: 'AdBlock Inc.',
+            category: 'Productivity'
+          },
+          {
+            id: 'grammarly',
+            name: 'Grammarly',
+            version: '15.0.0',
+            description: 'Grammar checker and writing assistant. Get real-time suggestions as you type.',
+            icon: '✍️',
+            author: 'Grammarly',
+            category: 'Productivity'
+          },
+          {
+            id: 'lastpass',
+            name: 'LastPass',
+            version: '4.120.0',
+            description: 'Password manager that secures your passwords and personal information.',
+            icon: '🔐',
+            author: 'LastPass',
+            category: 'Security'
+          },
+          {
+            id: 'darkreader',
+            name: 'Dark Reader',
+            version: '4.9.63',
+            description: 'Dark mode for every website. Care your eyes, use dark theme for night and daily browsing.',
+            icon: '🌙',
+            author: 'Dark Reader',
+            category: 'Accessibility'
+          },
+          {
+            id: 'momentum',
+            name: 'Momentum',
+            version: '2.0.0',
+            description: 'Replace new tab page with a personal dashboard featuring to-do, weather, and inspiration.',
+            icon: '⏰',
+            author: 'Momentum',
+            category: 'Productivity'
+          },
+          {
+            id: 'react-devtools',
+            name: 'React Developer Tools',
+            version: '5.0.0',
+            description: 'Adds React debugging tools to the Chrome Developer Tools.',
+            icon: '⚛️',
+            author: 'Meta',
+            category: 'Developer Tools'
+          }
+        ];
+      }
+
+      loadExtensions() {
+        const saved = localStorage.getItem('chrome-extensions');
+        if (saved) {
+          return JSON.parse(saved);
+        }
+        return [];
+      }
+
+      saveExtensions() {
+        localStorage.setItem('chrome-extensions', JSON.stringify(this.extensions));
+        this.updateExtensionToolbar();
+      }
+
+      openExtensions() {
+        const panel = document.getElementById('chrome-extensions-panel');
+        panel?.classList.remove('hidden');
+        this.renderExtensions('installed');
+        this.closeMenu();
+      }
+
+      closeExtensions() {
+        const panel = document.getElementById('chrome-extensions-panel');
+        panel?.classList.add('hidden');
+      }
+
+      switchExtensionsTab(tab) {
+        document.querySelectorAll('.chrome-extensions-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.tab === tab);
+        });
+        this.renderExtensions(tab);
+      }
+
+      renderExtensions(tab = 'installed') {
+        const content = document.getElementById('extensions-content');
+        if (!content) return;
+
+        if (tab === 'installed') {
+          if (this.extensions.length === 0) {
+            content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--chrome-text-secondary);">No extensions installed</div>';
+            return;
+          }
+
+          content.innerHTML = this.extensions.map(ext => this.renderExtensionCard(ext, true)).join('');
+        } else {
+          const installedIds = this.extensions.map(e => e.id);
+          const available = this.availableExtensions.filter(e => !installedIds.includes(e.id));
+          
+          if (available.length === 0) {
+            content.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--chrome-text-secondary);">All extensions installed</div>';
+            return;
+          }
+
+          content.innerHTML = available.map(ext => this.renderExtensionCard(ext, false)).join('');
+        }
+
+        // Add event listeners
+        content.querySelectorAll('.chrome-extension-toggle').forEach(toggle => {
+          toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const extId = toggle.dataset.extId;
+            this.toggleExtension(extId);
+          });
+        });
+
+        content.querySelectorAll('.chrome-extension-btn.install').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const extId = btn.dataset.extId;
+            this.installExtension(extId);
+          });
+        });
+
+        content.querySelectorAll('.chrome-extension-btn.remove').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const extId = btn.dataset.extId;
+            this.removeExtension(extId);
+          });
+        });
+      }
+
+      renderExtensionCard(ext, isInstalled) {
+        const isEnabled = isInstalled && this.extensions.find(e => e.id === ext.id)?.enabled !== false;
+        return `
+          <div class="chrome-extension-card">
+            <div class="chrome-extension-icon">${ext.icon}</div>
+            <div class="chrome-extension-details">
+              <div class="chrome-extension-header-row">
+                <div>
+                  <div class="chrome-extension-name">${ext.name}</div>
+                  <div class="chrome-extension-version">Version ${ext.version}</div>
+                </div>
+              </div>
+              <div class="chrome-extension-description">${ext.description}</div>
+              <div class="chrome-extension-actions">
+                ${isInstalled ? `
+                  <button class="chrome-extension-toggle ${isEnabled ? 'enabled' : ''}" data-ext-id="${ext.id}" title="${isEnabled ? 'Disable' : 'Enable'}"></button>
+                  <span style="font-size: 12px; color: var(--chrome-text-secondary); margin-right: 8px;">${isEnabled ? 'Enabled' : 'Disabled'}</span>
+                  <button class="chrome-extension-btn danger remove" data-ext-id="${ext.id}">Remove</button>
+                ` : `
+                  <button class="chrome-extension-btn install" data-ext-id="${ext.id}">Install</button>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      installExtension(extId) {
+        const ext = this.availableExtensions.find(e => e.id === extId);
+        if (!ext) return;
+
+        if (this.extensions.find(e => e.id === extId)) {
+          this.showNotification('Extension already installed');
+          return;
+        }
+
+        this.extensions.push({
+          ...ext,
+          enabled: true,
+          installedAt: Date.now()
+        });
+        this.saveExtensions();
+        this.renderExtensions('installed');
+        this.showNotification(`${ext.name} installed`);
+      }
+
+      removeExtension(extId) {
+        if (confirm('Remove this extension?')) {
+          this.extensions = this.extensions.filter(e => e.id !== extId);
+          this.saveExtensions();
+          this.renderExtensions('installed');
+          this.showNotification('Extension removed');
+        }
+      }
+
+      toggleExtension(extId) {
+        const ext = this.extensions.find(e => e.id === extId);
+        if (!ext) return;
+
+        ext.enabled = !ext.enabled;
+        this.saveExtensions();
+        this.renderExtensions('installed');
+        this.showNotification(`${ext.name} ${ext.enabled ? 'enabled' : 'disabled'}`);
+      }
+
+      updateExtensionToolbar() {
+        const toolbar = document.querySelector('.chrome-right-controls');
+        if (!toolbar) return;
+
+        // Remove existing extension icons
+        const existingIcons = toolbar.querySelectorAll('.chrome-extension-toolbar-icon');
+        existingIcons.forEach(icon => icon.remove());
+
+        // Add icons for enabled extensions
+        const enabledExtensions = this.extensions.filter(e => e.enabled);
+        enabledExtensions.forEach((ext, index) => {
+          const icon = document.createElement('div');
+          icon.className = 'chrome-extension-toolbar-icon';
+          icon.title = ext.name;
+          icon.innerHTML = `
+            <span style="font-size: 16px;">${ext.icon}</span>
+            ${ext.id === 'adblock' ? '<div class="chrome-extension-badge"></div>' : ''}
+          `;
+          icon.addEventListener('click', () => {
+            this.showNotification(`${ext.name} clicked`);
+          });
+          
+          // Insert before extensions button
+          const extensionsBtn = document.getElementById('extensions-btn');
+          if (extensionsBtn) {
+            toolbar.insertBefore(icon, extensionsBtn);
+          }
+        });
+      }
+
+      // Site information methods
+      showSiteInfo(e) {
+        const popup = document.getElementById('chrome-site-info-popup');
+        const icon = document.getElementById('site-info-icon');
+        if (!popup || !icon) return;
+
+        // Get icon position
+        const iconRect = icon.getBoundingClientRect();
+        const popupWidth = 320;
+        const popupHeight = popup.offsetHeight || 300;
+        
+        // Position popup below and aligned to the left of icon
+        let left = iconRect.left;
+        let top = iconRect.bottom + 8;
+        
+        // Adjust if popup would go off screen
+        if (left + popupWidth > window.innerWidth - 12) {
+          left = window.innerWidth - popupWidth - 12;
+        }
+        if (left < 12) {
+          left = 12;
+        }
+        
+        // If popup would go off bottom, position above icon
+        if (top + popupHeight > window.innerHeight - 12) {
+          top = iconRect.top - popupHeight - 8;
+        }
+        
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+        popup.classList.remove('hidden');
+        
+        // Update domain name from URL input
+        const urlInput = document.getElementById('url-input');
+        const domainEl = document.getElementById('site-info-domain');
+        if (urlInput && domainEl) {
+          const url = urlInput.value || 'bunchhieng.github.io';
+          domainEl.textContent = url;
+        }
+      }
+
+      hideSiteInfo() {
+        const popup = document.getElementById('chrome-site-info-popup');
+        popup?.classList.add('hidden');
       }
     }
 
