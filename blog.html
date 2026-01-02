@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Bunchhieng Soth</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%2328a745'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    :root {
+      --chrome-bg: #202124;
+      --chrome-surface: #292a2d;
+      --chrome-surface-variant: #35363a;
+      --chrome-border: #1f1f1f;
+      --chrome-text: #e8eaed;
+      --chrome-text-secondary: #9aa0a6;
+      --chrome-accent: #8ab4f8;
+    }
+
+    body {
+      background: #000000;
+      color: #e8eaed;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Markdown Styles */
+    .markdown-content {
+      line-height: 1.7;
+    }
+
+    .markdown-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      border-bottom: 2px solid #3c3c3c;
+      padding-bottom: 0.5rem;
+    }
+
+    .markdown-content h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .markdown-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #e8eaed;
+    }
+
+    .markdown-content p {
+      margin-bottom: 1rem;
+      color: #d4d4d4;
+    }
+
+    .markdown-content code {
+      background: #2d2d2d;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-size: 0.9em;
+      color: #f48771;
+    }
+
+    .markdown-content pre {
+      background: #1a1a1a;
+      border: 1px solid #3c3c3c;
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .markdown-content pre code {
+      background: transparent;
+      padding: 0;
+      color: #d4d4d4;
+    }
+
+    .markdown-content blockquote {
+      border-left: 4px solid #3c9ae8;
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: #9aa0a6;
+      font-style: italic;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    .markdown-content li {
+      margin: 0.5rem 0;
+      color: #d4d4d4;
+    }
+
+    .markdown-content a {
+      color: #3c9ae8;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+
+    .markdown-content a:hover {
+      color: #5bb3f8;
+    }
+
+    .markdown-content img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .markdown-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .markdown-content th,
+    .markdown-content td {
+      border: 1px solid #3c3c3c;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .markdown-content th {
+      background: #2d2d2d;
+      font-weight: 600;
+    }
+
+    .blog-post-card {
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .blog-post-card:hover {
+      transform: translateY(-2px);
+      border-color: #3c9ae8;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #9aa0a6;
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+  <div class="container max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+          <div class="relative w-8 h-8 flex items-center justify-center group">
+            <svg class="w-8 h-8 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2 L26 8 L26 24 L16 30 L6 24 L6 8 Z" fill="url(#blogLogoGradient)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+              <path d="M10 9 L10 23 M10 9 L14 9 Q17 9 17 12 Q17 15 14 15 M10 15 L14 15 Q17 15 17 18 Q17 21 14 21 L10 21" 
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M20 9 L23 12 L20 15 M23 17 L20 21" 
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="blogLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="text-2xl font-semibold">Blog</h1>
+        </div>
+        <a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">
+          ← Back to Portfolio
+        </a>
+      </div>
+    </header>
+
+    <!-- Blog Posts List -->
+    <div id="blog-list" class="space-y-6">
+      <div class="loading">Loading posts...</div>
+    </div>
+
+    <!-- Blog Post View -->
+    <div id="blog-post-view" class="hidden">
+      <button id="back-to-list" class="mb-6 text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Posts
+      </button>
+      <article id="blog-post-content" class="markdown-content"></article>
+    </div>
+  </div>
+
+  <script>
+    // Blog posts configuration
+    const blogPosts = [
+      {
+        slug: 'welcome-to-my-blog',
+        title: 'Welcome to My Blog',
+        date: '2026-01-15',
+        excerpt: 'Thoughts on software engineering, web development, and building tools that matter.',
+        tags: ['general', 'introduction']
+      },
+    ];
+
+    // Load blog posts list
+    function loadBlogList() {
+      const blogList = document.getElementById('blog-list');
+      if (!blogList) return;
+
+      blogList.innerHTML = blogPosts.map(post => `
+        <div class="blog-post-card bg-gray-900/50 border border-gray-800 rounded-lg p-6 cursor-pointer" data-slug="${post.slug}">
+          <div class="flex items-start justify-between mb-3">
+            <h2 class="text-xl font-semibold text-white hover:text-green-400 transition-colors">${post.title}</h2>
+            <span class="text-sm text-gray-500">${formatDate(post.date)}</span>
+          </div>
+          <p class="text-gray-400 mb-4">${post.excerpt}</p>
+          <div class="flex items-center gap-2 flex-wrap">
+            ${post.tags.map(tag => `<span class="px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded border border-green-500/20">${tag}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Add click handlers
+      blogList.querySelectorAll('.blog-post-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const slug = card.dataset.slug;
+          loadBlogPost(slug);
+        });
+      });
+    }
+
+    // Load individual blog post
+    async function loadBlogPost(slug) {
+      const blogList = document.getElementById('blog-list');
+      const blogPostView = document.getElementById('blog-post-view');
+      const blogPostContent = document.getElementById('blog-post-content');
+
+      if (!blogList || !blogPostView || !blogPostContent) return;
+
+      // Show loading
+      blogList.classList.add('hidden');
+      blogPostView.classList.remove('hidden');
+      blogPostContent.innerHTML = '<div class="loading">Loading post...</div>';
+
+      try {
+        // Try to load markdown file
+        const response = await fetch(`blog/posts/${slug}.md`);
+        if (!response.ok) {
+          throw new Error('Post not found');
+        }
+
+        const markdown = await response.text();
+        const html = marked.parse(markdown);
+        blogPostContent.innerHTML = html;
+      } catch (error) {
+        // If markdown file doesn't exist, show a placeholder
+        const post = blogPosts.find(p => p.slug === slug);
+        if (post) {
+          blogPostContent.innerHTML = `
+            <h1>${post.title}</h1>
+            <p class="text-gray-400 mb-6">${formatDate(post.date)}</p>
+            <p>This post is coming soon! Check back later.</p>
+          `;
+        } else {
+          blogPostContent.innerHTML = '<p>Post not found.</p>';
+        }
+      }
+    }
+
+    // Back to list handler
+    document.getElementById('back-to-list')?.addEventListener('click', () => {
+      document.getElementById('blog-list')?.classList.remove('hidden');
+      document.getElementById('blog-post-view')?.classList.add('hidden');
+    });
+
+    // Format date
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Check if we're viewing a specific post from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const postSlug = urlParams.get('post');
+    if (postSlug) {
+      loadBlogPost(postSlug);
+    } else {
+      loadBlogList();
+    }
+  </script>
+</body>
+</html>
+
