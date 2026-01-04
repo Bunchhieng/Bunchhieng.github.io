@@ -179,6 +179,34 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
+      opacity: 0;
+      animation: chromeWindowEntrance 0.8s ease-out forwards;
+    }
+
+    @keyframes chromeWindowEntrance {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* Typing cursor animation */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 14px;
+      background: var(--chrome-blue);
+      margin-left: 2px;
+      animation: cursorBlink 1s infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
     /* Hide mobile UI on desktop */
@@ -289,7 +317,8 @@
 
     .chrome-addressbar-container {
       flex: 1;
-      max-width: 800px;
+      max-width: none;
+      margin: 0 12px;
     }
 
     .chrome-addressbar {
@@ -1536,6 +1565,129 @@
 
     .console-input::placeholder {
       color: #6e6e6e;
+    }
+
+    /* Sources Panel */
+    .sources-panel {
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .sources-toolbar {
+      display: flex;
+      gap: 12px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #3c3c3c;
+      align-items: center;
+      background: #2d2d2d;
+    }
+
+    .sources-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #3c9ae8;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sources-btn:hover {
+      background: #4fa9f0;
+    }
+
+    .sources-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .sources-info {
+      color: #9d9d9d;
+      font-size: 11px;
+      font-style: italic;
+    }
+
+    .sources-content {
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .sources-tree {
+      width: 250px;
+      background: #252526;
+      border-right: 1px solid #3c3c3c;
+      padding: 8px;
+      overflow-y: auto;
+    }
+
+    .sources-tree-title {
+      color: #9d9d9d;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      padding: 4px 8px;
+    }
+
+    .sources-file {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      color: #d4d4d4;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sources-file:hover {
+      background: #2d2d2d;
+    }
+
+    .sources-file.active {
+      background: #37373d;
+    }
+
+    .sources-file svg {
+      width: 16px;
+      height: 16px;
+      color: #3c9ae8;
+      flex-shrink: 0;
+    }
+
+    .sources-viewer {
+      flex: 1;
+      background: #1e1e1e;
+      overflow: auto;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .sources-viewer-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #6e6e6e;
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .sources-code {
+      color: #d4d4d4;
+      white-space: pre;
+      margin: 0;
+      padding: 12px;
     }
 
     /* Network Panel */
@@ -3294,6 +3446,381 @@
         padding: 0.5rem;
       }
     }
+
+    /* Omnibox Suggestions Dropdown */
+    .chrome-omnibox-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--chrome-surface);
+      border: 1px solid var(--chrome-border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .chrome-omnibox-dropdown.hidden {
+      display: none;
+    }
+
+    .chrome-omnibox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+      border-bottom: 1px solid var(--chrome-border-light);
+    }
+
+    .chrome-omnibox-item:last-child {
+      border-bottom: none;
+    }
+
+    .chrome-omnibox-item:hover,
+    .chrome-omnibox-item.selected {
+      background: var(--chrome-hover);
+    }
+
+    .chrome-omnibox-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--chrome-text-secondary);
+    }
+
+    .chrome-omnibox-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chrome-omnibox-title {
+      color: var(--chrome-text);
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-omnibox-url {
+      color: var(--chrome-text-secondary);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-omnibox-match {
+      color: var(--chrome-blue);
+      font-weight: 500;
+    }
+
+    /* Page Context Menu */
+    .chrome-page-context-menu {
+      position: fixed;
+      background: var(--chrome-surface);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      padding: 4px 0;
+      min-width: 200px;
+      z-index: 10000;
+      border: 1px solid var(--chrome-border);
+    }
+
+    .chrome-page-context-menu.hidden {
+      display: none;
+    }
+
+    .chrome-page-context-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--chrome-text);
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+      text-align: left;
+    }
+
+    .chrome-page-context-item:hover {
+      background: var(--chrome-hover);
+    }
+
+    .chrome-page-context-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--chrome-text-secondary);
+    }
+
+    .chrome-page-context-separator {
+      height: 1px;
+      background: var(--chrome-border-light);
+      margin: 4px 0;
+    }
+
+    /* View Source Modal */
+    .chrome-view-source-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .chrome-view-source-modal.hidden {
+      display: none;
+    }
+
+    .chrome-view-source-container {
+      background: var(--chrome-bg);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 1200px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .chrome-view-source-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--chrome-border);
+      background: var(--chrome-surface);
+    }
+
+    .chrome-view-source-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--chrome-text);
+    }
+
+    .chrome-view-source-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--chrome-blue);
+    }
+
+    .chrome-view-source-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: none;
+      border: none;
+      color: var(--chrome-text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s;
+    }
+
+    .chrome-view-source-close:hover {
+      background: var(--chrome-hover);
+    }
+
+    .chrome-view-source-content {
+      flex: 1;
+      overflow: auto;
+      padding: 20px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      background: #1e1e1e;
+    }
+
+    .chrome-view-source-code {
+      color: #d4d4d4;
+      white-space: pre;
+      margin: 0;
+    }
+
+    .chrome-view-source-line {
+      display: block;
+      padding-left: 60px;
+      position: relative;
+    }
+
+    .chrome-view-source-line-number {
+      position: absolute;
+      left: 0;
+      width: 50px;
+      text-align: right;
+      color: #858585;
+      user-select: none;
+      padding-right: 10px;
+    }
+
+    /* Syntax highlighting for view source */
+    .source-tag { color: #569cd6; }
+    .source-attr { color: #9cdcfe; }
+    .source-string { color: #ce9178; }
+    .source-comment { color: #6a9955; font-style: italic; }
+    .source-doctype { color: #c586c0; }
+
+    /* Dino Game */
+    .dino-game-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .dino-game-modal.hidden {
+      display: none;
+    }
+
+    .dino-game-container {
+      background: #f7f7f7;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .dino-game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .dino-game-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #5f6368;
+      font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .dino-game-title svg {
+      color: #4285f4;
+    }
+
+    .dino-game-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: none;
+      border: none;
+      color: #5f6368;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s;
+    }
+
+    .dino-game-close:hover {
+      background: #e8eaed;
+    }
+
+    .dino-game-content {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .dino-score, .dino-high-score {
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      font-weight: bold;
+      color: #535353;
+      position: absolute;
+      top: 20px;
+    }
+
+    .dino-score {
+      right: 30px;
+    }
+
+    .dino-high-score {
+      right: 120px;
+    }
+
+    #dino-canvas {
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      display: block;
+      margin: 40px auto 20px;
+      background: white;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .dino-game-over {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .dino-game-over.hidden {
+      display: none;
+    }
+
+    .dino-game-over-text {
+      font-family: 'Courier New', monospace;
+      font-size: 24px;
+      font-weight: bold;
+      color: #535353;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .dino-restart-hint, .dino-start-hint {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #9e9e9e;
+      margin-top: 10px;
+    }
+
+    .dino-start-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+    }
+
+    .dino-start-hint.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body class="bg-black text-white min-h-screen font-sans selection:bg-green-500/30">
@@ -3331,7 +3858,7 @@
       </div>
 
       <!-- Address Bar -->
-      <div class="chrome-addressbar-container">
+      <div class="chrome-addressbar-container" style="position: relative;">
         <div class="chrome-addressbar">
           <div class="chrome-url-icon" id="site-info-icon" title="Site information">
             <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
@@ -3340,13 +3867,15 @@
             type="text"
             class="chrome-url-input"
             value="bunchhieng.github.io"
-            readonly
+            placeholder="Search or type URL"
             id="url-input"
           />
           <button class="chrome-star-btn" aria-label="Bookmark this tab">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
           </button>
         </div>
+        <!-- Omnibox Dropdown -->
+        <div class="chrome-omnibox-dropdown hidden" id="omnibox-dropdown"></div>
       </div>
 
       <!-- Right Controls -->
@@ -3401,7 +3930,7 @@
 
     <!-- Bookmark Bar -->
     <div class="chrome-bookmark-bar" id="bookmark-bar">
-      <div class="chrome-bookmark" data-url="https://github.com/Bunchhieng" data-tab="portfolio">
+      <div class="chrome-bookmark" data-url="https://github.com/Bunchhieng">
         <div class="chrome-bookmark-icon">
           <svg fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -3409,7 +3938,7 @@
         </div>
         <span class="chrome-bookmark-text">GitHub</span>
       </div>
-      <div class="chrome-bookmark" data-url="https://www.linkedin.com/in/bunchhieng/" data-tab="portfolio">
+      <div class="chrome-bookmark" data-url="https://www.linkedin.com/in/bunchhieng/">
         <div class="chrome-bookmark-icon">
           <svg fill="currentColor" viewBox="0 0 24 24">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -3417,7 +3946,7 @@
         </div>
         <span class="chrome-bookmark-text">LinkedIn</span>
       </div>
-      <div class="chrome-bookmark" data-url="mailto:bunchhieng@gmail.com" data-tab="portfolio">
+      <div class="chrome-bookmark" data-url="mailto:bunchhieng@gmail.com">
         <div class="chrome-bookmark-icon">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -3436,13 +3965,21 @@
         </div>
         <span class="chrome-bookmark-text">Blog</span>
       </div>
-      <div class="chrome-bookmark" data-url="https://sportscard360.com" data-tab="portfolio">
+      <div class="chrome-bookmark" data-url="https://sportscard360.com">
         <div class="chrome-bookmark-icon">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
           </svg>
         </div>
         <span class="chrome-bookmark-text">SportsCard360</span>
+      </div>
+      <div class="chrome-bookmark chrome-bookmark-dino" id="dino-bookmark" title="Play Chrome Dino Game!">
+        <div class="chrome-bookmark-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 6h2v2H4zm0 4h2v2H4zm0 4h2v2H4zm16-6h-2V6h-2V4h2V2h2v2h2v2h-2v2zm0 2v2h-2v-2h2zm-4 4v-2h2v2h2v2h-2v2h-2v2h-2v-2H8v2H6v-2H4v-2h2v-2h2v2h2v-2h6z"/>
+          </svg>
+        </div>
+        <span class="chrome-bookmark-text">🦖 Dino</span>
       </div>
     </div>
 
@@ -4002,6 +4539,7 @@
           <div class="devtools-tabs">
             <button class="devtools-tab active" data-panel="console">Console</button>
             <button class="devtools-tab" data-panel="elements">Elements</button>
+            <button class="devtools-tab" data-panel="sources">Sources</button>
             <button class="devtools-tab" data-panel="network">Network</button>
             <button class="devtools-tab" data-panel="performance">Performance</button>
           </div>
@@ -4057,6 +4595,35 @@
               </div>
               <div class="elements-properties" id="elements-properties">
                 <div class="properties-empty">Select an element to view its properties</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sources Panel -->
+          <div class="devtools-panel sources-panel" id="sources-panel">
+            <div class="sources-toolbar">
+              <button class="sources-btn" id="view-page-source-btn" title="View page source">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+                View Page Source
+              </button>
+              <span class="sources-info">Press Ctrl+U or Cmd+U to open source viewer</span>
+            </div>
+            <div class="sources-content">
+              <div class="sources-tree">
+                <div class="sources-tree-title">Page</div>
+                <div class="sources-file" id="index-html-file" data-file="index.html">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  <span>index.html</span>
+                </div>
+              </div>
+              <div class="sources-viewer">
+                <div class="sources-viewer-empty">
+                  Click "View Page Source" button or select a file to view its contents
+                </div>
               </div>
             </div>
           </div>
@@ -4606,6 +5173,105 @@
     </button>
   </div>
 
+  <!-- Page Context Menu -->
+  <div id="chrome-page-context-menu" class="chrome-page-context-menu hidden">
+    <button class="chrome-page-context-item" id="page-context-back">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      <span>Back</span>
+    </button>
+    <button class="chrome-page-context-item" id="page-context-forward">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+      <span>Forward</span>
+    </button>
+    <button class="chrome-page-context-item" id="page-context-reload">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+      </svg>
+      <span>Reload</span>
+    </button>
+    <div class="chrome-page-context-separator"></div>
+    <button class="chrome-page-context-item" id="page-context-save-as">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+      </svg>
+      <span>Save as...</span>
+    </button>
+    <button class="chrome-page-context-item" id="page-context-print">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+      </svg>
+      <span>Print...</span>
+    </button>
+    <div class="chrome-page-context-separator"></div>
+    <button class="chrome-page-context-item" id="page-context-view-source">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+      </svg>
+      <span>View page source</span>
+    </button>
+    <button class="chrome-page-context-item" id="page-context-inspect">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <span>Inspect</span>
+    </button>
+  </div>
+
+  <!-- View Source Modal -->
+  <div id="chrome-view-source-modal" class="chrome-view-source-modal hidden">
+    <div class="chrome-view-source-container">
+      <div class="chrome-view-source-header">
+        <div class="chrome-view-source-title">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <span id="view-source-title">Page Source</span>
+        </div>
+        <button class="chrome-view-source-close" id="view-source-close">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="chrome-view-source-content">
+        <pre class="chrome-view-source-code" id="view-source-code"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dino Game Modal -->
+  <div id="dino-game-modal" class="dino-game-modal hidden">
+    <div class="dino-game-container">
+      <div class="dino-game-header">
+        <div class="dino-game-title">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span>chrome://dino</span>
+        </div>
+        <button class="dino-game-close" id="dino-game-close">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="dino-game-content">
+        <div class="dino-score" id="dino-score">00000</div>
+        <div class="dino-high-score" id="dino-high-score">HI 00000</div>
+        <canvas id="dino-canvas" width="600" height="200"></canvas>
+        <div class="dino-game-over hidden" id="dino-game-over">
+          <div class="dino-game-over-text">G A M E  O V E R</div>
+          <div class="dino-restart-hint">Press SPACE to restart</div>
+        </div>
+        <div class="dino-start-hint" id="dino-start-hint">Press SPACE to start</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Settings Panel -->
   <div id="chrome-settings-panel" class="chrome-settings-panel hidden">
     <div class="chrome-settings-header">
@@ -4697,6 +5363,8 @@
         }
         // Update extension toolbar
         this.updateExtensionToolbar();
+        // Start welcome animation
+        this.startWelcomeAnimation();
       }
 
       attachEventListeners() {
@@ -4811,6 +5479,12 @@
           });
         });
 
+        // Dino game bookmark
+        const dinoBookmark = document.getElementById('dino-bookmark');
+        dinoBookmark?.addEventListener('click', () => {
+          this.openDinoGame();
+        });
+
         // History panel
         const historyMenuItem = document.getElementById('menu-history');
         historyMenuItem?.addEventListener('click', () => this.openHistory());
@@ -4892,10 +5566,79 @@
         const starBtn = document.querySelector('.chrome-star-btn');
         starBtn?.addEventListener('click', () => this.toggleBookmark());
 
-        // URL input click (select all)
+        // URL input and Omnibox
         const urlInput = document.getElementById('url-input');
         urlInput?.addEventListener('click', function() {
           this.select();
+        });
+        urlInput?.addEventListener('input', (e) => this.handleOmniboxInput(e.target.value));
+        urlInput?.addEventListener('keydown', (e) => this.handleOmniboxKeydown(e));
+        urlInput?.addEventListener('focus', () => this.showOmnibox());
+        urlInput?.addEventListener('blur', (e) => {
+          // Delay to allow clicking on dropdown items
+          setTimeout(() => this.hideOmnibox(), 150);
+        });
+
+        // Close omnibox when clicking outside
+        document.addEventListener('click', (e) => {
+          const omniboxDropdown = document.getElementById('omnibox-dropdown');
+          const urlInput = document.getElementById('url-input');
+          if (omniboxDropdown && !omniboxDropdown.contains(e.target) && !urlInput?.contains(e.target)) {
+            this.hideOmnibox();
+          }
+        });
+
+        // Page context menu
+        const chromeContentArea = document.querySelector('.chrome-content');
+        chromeContentArea?.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          this.showPageContextMenu(e);
+        });
+
+        // Page context menu items
+        document.getElementById('page-context-back')?.addEventListener('click', () => {
+          this.navigateBack();
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-forward')?.addEventListener('click', () => {
+          this.navigateForward();
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-reload')?.addEventListener('click', () => {
+          this.refresh();
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-save-as')?.addEventListener('click', () => {
+          this.showNotification('Save page as...');
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-print')?.addEventListener('click', () => {
+          this.showNotification('Print page...');
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-view-source')?.addEventListener('click', () => {
+          this.viewPageSource();
+          this.hidePageContextMenu();
+        });
+        document.getElementById('page-context-inspect')?.addEventListener('click', () => {
+          this.openDevTools();
+          this.hidePageContextMenu();
+        });
+
+        // Close page context menu when clicking outside
+        document.addEventListener('click', (e) => {
+          const contextMenu = document.getElementById('chrome-page-context-menu');
+          if (contextMenu && !contextMenu.contains(e.target)) {
+            this.hidePageContextMenu();
+          }
+        });
+
+        // View source modal
+        document.getElementById('view-source-close')?.addEventListener('click', () => this.closeViewSource());
+        document.getElementById('chrome-view-source-modal')?.addEventListener('click', (e) => {
+          if (e.target.id === 'chrome-view-source-modal') {
+            this.closeViewSource();
+          }
         });
 
         // Site information popup
@@ -4980,6 +5723,12 @@
           if ((e.metaKey || e.ctrlKey) && e.key === 'd') {
             e.preventDefault();
             this.toggleBookmark();
+          }
+
+          // Cmd/Ctrl + U: View page source
+          if ((e.metaKey || e.ctrlKey) && e.key === 'u') {
+            e.preventDefault();
+            this.viewPageSource();
           }
 
           // F11: Fullscreen
@@ -6301,6 +7050,668 @@
           this.showNotification('DevTools docked to right');
         }
       }
+
+      // Omnibox methods
+      handleOmniboxInput(value) {
+        if (!value || value.trim() === '') {
+          this.hideOmnibox();
+          return;
+        }
+
+        const suggestions = this.getOmniboxSuggestions(value);
+        this.renderOmniboxSuggestions(suggestions);
+        this.showOmnibox();
+      }
+
+      handleOmniboxKeydown(e) {
+        const dropdown = document.getElementById('omnibox-dropdown');
+        const items = dropdown?.querySelectorAll('.chrome-omnibox-item');
+        const selectedItem = dropdown?.querySelector('.chrome-omnibox-item.selected');
+
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (selectedItem) {
+            const url = selectedItem.dataset.url;
+            if (url) {
+              this.navigateToUrl(url);
+            }
+          } else {
+            this.navigateToUrl(e.target.value);
+          }
+          this.hideOmnibox();
+        } else if (e.key === 'Escape') {
+          this.hideOmnibox();
+          e.target.blur();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (!selectedItem && items?.length > 0) {
+            items[0].classList.add('selected');
+          } else if (selectedItem) {
+            const currentIndex = Array.from(items).indexOf(selectedItem);
+            selectedItem.classList.remove('selected');
+            if (currentIndex < items.length - 1) {
+              items[currentIndex + 1].classList.add('selected');
+            } else {
+              items[0].classList.add('selected');
+            }
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (selectedItem) {
+            const currentIndex = Array.from(items).indexOf(selectedItem);
+            selectedItem.classList.remove('selected');
+            if (currentIndex > 0) {
+              items[currentIndex - 1].classList.add('selected');
+            } else {
+              items[items.length - 1].classList.add('selected');
+            }
+          }
+        }
+      }
+
+      getOmniboxSuggestions(query) {
+        const suggestions = [];
+        const lowerQuery = query.toLowerCase();
+
+        // Search suggestions (simulated)
+        suggestions.push({
+          type: 'search',
+          title: query,
+          url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+          icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>'
+        });
+
+        // History suggestions (search in browsing history)
+        const historyMatches = this.browsingHistory
+          .filter(item =>
+            item && item.title && item.url &&
+            (item.title.toLowerCase().includes(lowerQuery) ||
+             item.url.toLowerCase().includes(lowerQuery))
+          )
+          .slice(0, 3);
+
+        historyMatches.forEach(item => {
+          suggestions.push({
+            type: 'history',
+            title: item.title,
+            url: item.url,
+            icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+          });
+        });
+
+        // Bookmark suggestions
+        const bookmarkMatches = this.bookmarks
+          .filter(item =>
+            item && item.title && item.url &&
+            (item.title.toLowerCase().includes(lowerQuery) ||
+             item.url.toLowerCase().includes(lowerQuery))
+          )
+          .slice(0, 2);
+
+        bookmarkMatches.forEach(item => {
+          suggestions.push({
+            type: 'bookmark',
+            title: item.title,
+            url: item.url,
+            icon: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>'
+          });
+        });
+
+        return suggestions.slice(0, 5); // Max 5 suggestions
+      }
+
+      renderOmniboxSuggestions(suggestions) {
+        const dropdown = document.getElementById('omnibox-dropdown');
+        if (!dropdown) return;
+
+        if (suggestions.length === 0) {
+          this.hideOmnibox();
+          return;
+        }
+
+        dropdown.innerHTML = suggestions.map(suggestion => `
+          <div class="chrome-omnibox-item" data-url="${suggestion.url}">
+            <div class="chrome-omnibox-icon">${suggestion.icon}</div>
+            <div class="chrome-omnibox-content">
+              <div class="chrome-omnibox-title">${this.escapeHtml(suggestion.title)}</div>
+              <div class="chrome-omnibox-url">${this.escapeHtml(suggestion.url)}</div>
+            </div>
+          </div>
+        `).join('');
+
+        // Add click handlers
+        dropdown.querySelectorAll('.chrome-omnibox-item').forEach(item => {
+          item.addEventListener('click', () => {
+            this.navigateToUrl(item.dataset.url);
+            this.hideOmnibox();
+          });
+        });
+      }
+
+      navigateToUrl(url) {
+        if (!url) return;
+
+        // Easter egg: chrome://dino
+        if (url.toLowerCase() === 'chrome://dino') {
+          this.openDinoGame();
+          this.hideOmnibox();
+          const urlInput = document.getElementById('url-input');
+          if (urlInput) {
+            urlInput.value = 'bunchhieng.github.io';
+            urlInput.blur();
+          }
+          return;
+        }
+
+        // Check if it's a search query or URL
+        if (!url.includes('.') && !url.startsWith('http')) {
+          // Open Google search in new tab
+          window.open(`https://www.google.com/search?q=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+        } else if (url === 'bunchhieng.github.io' || url === 'bunchhieng.github.io/blog') {
+          // Navigate within the simulator
+          if (url.includes('/blog')) {
+            this.switchTab('blog');
+          } else {
+            this.switchTab('portfolio');
+          }
+        } else {
+          // External URL - open in new tab
+          const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+          window.open(fullUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Update URL input
+        const urlInput = document.getElementById('url-input');
+        if (urlInput) {
+          urlInput.value = url;
+          urlInput.blur();
+        }
+      }
+
+      showOmnibox() {
+        const dropdown = document.getElementById('omnibox-dropdown');
+        if (dropdown && dropdown.innerHTML.trim() !== '') {
+          dropdown.classList.remove('hidden');
+        }
+      }
+
+      hideOmnibox() {
+        const dropdown = document.getElementById('omnibox-dropdown');
+        if (dropdown) {
+          dropdown.classList.add('hidden');
+        }
+      }
+
+      // Page context menu methods
+      showPageContextMenu(e) {
+        const menu = document.getElementById('chrome-page-context-menu');
+        if (!menu) return;
+
+        menu.style.left = `${e.pageX}px`;
+        menu.style.top = `${e.pageY}px`;
+        menu.classList.remove('hidden');
+      }
+
+      hidePageContextMenu() {
+        const menu = document.getElementById('chrome-page-context-menu');
+        if (menu) {
+          menu.classList.add('hidden');
+        }
+      }
+
+      // View source methods
+      viewPageSource() {
+        const modal = document.getElementById('chrome-view-source-modal');
+        const codeElement = document.getElementById('view-source-code');
+        const titleElement = document.getElementById('view-source-title');
+
+        if (!modal || !codeElement) return;
+
+        // Get the current page HTML
+        const htmlContent = document.documentElement.outerHTML;
+        const lineCount = htmlContent.split('\n').length;
+
+        // For large files, show plain text without syntax highlighting
+        if (lineCount > 1000) {
+          const escaped = this.escapeHtml(htmlContent);
+          codeElement.innerHTML = `
+            <div style="padding: 16px; background: #2d2d2d; border-bottom: 1px solid #3c3c3c; color: #d4d4d4; font-size: 13px; position: sticky; top: 0; z-index: 10;">
+              <strong>⚡ Large file (${lineCount} lines)</strong> - Syntax highlighting disabled for performance
+              <button onclick="copySourceToClipboard()" style="margin-left: 16px; padding: 6px 12px; background: #3c9ae8; border: none; color: white; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500;">
+                📋 Copy to Clipboard
+              </button>
+            </div>
+            <pre style="margin: 0; padding: 20px; white-space: pre; color: #d4d4d4; line-height: 1.6;">${escaped}</pre>
+          `;
+        } else {
+          // For smaller files, use syntax highlighting
+          const formattedHtml = this.formatHtmlForDisplay(htmlContent);
+          codeElement.innerHTML = formattedHtml;
+        }
+
+        // Update title
+        const currentUrl = document.getElementById('url-input')?.value || 'Page';
+        if (titleElement) {
+          titleElement.textContent = `View Source: ${currentUrl}`;
+        }
+
+        // Show modal
+        modal.classList.remove('hidden');
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeViewSource() {
+        const modal = document.getElementById('chrome-view-source-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      formatHtmlForDisplay(html) {
+        // Escape HTML for display
+        const escaped = this.escapeHtml(html);
+
+        // Add line numbers and basic syntax highlighting
+        const lines = escaped.split('\n');
+        return lines.map((line, index) => {
+          const lineNum = index + 1;
+          const highlighted = this.highlightHtmlSyntax(line);
+          return `<span class="chrome-view-source-line"><span class="chrome-view-source-line-number">${lineNum}</span>${highlighted}</span>`;
+        }).join('\n');
+      }
+
+      highlightHtmlSyntax(line) {
+        // Basic syntax highlighting
+        return line
+          // DOCTYPE
+          .replace(/(&lt;!DOCTYPE[^&]*&gt;)/gi, '<span class="source-doctype">$1</span>')
+          // HTML comments
+          .replace(/(&lt;!--.*?--&gt;)/g, '<span class="source-comment">$1</span>')
+          // Tags
+          .replace(/(&lt;\/?[\w-]+)/g, '<span class="source-tag">$1</span>')
+          .replace(/(&gt;)/g, '<span class="source-tag">$1</span>')
+          // Attributes
+          .replace(/([\w-]+)=/g, '<span class="source-attr">$1</span>=')
+          // String values
+          .replace(/=&quot;([^&]*)&quot;/g, '=<span class="source-string">&quot;$1&quot;</span>')
+          .replace(/=&#39;([^&]*)&#39;/g, '=<span class="source-string">&#39;$1&#39;</span>');
+      }
+
+      escapeHtml(html) {
+        const div = document.createElement('div');
+        div.textContent = html;
+        return div.innerHTML;
+      }
+
+      // Welcome animation
+      startWelcomeAnimation() {
+        // Wait for window entrance animation to complete
+        setTimeout(() => {
+          this.typeWelcomeMessage();
+        }, 900);
+      }
+
+      typeWelcomeMessage() {
+        const urlInput = document.getElementById('url-input');
+        if (!urlInput) return;
+
+        const messages = [
+          "Hi, I'm Bunchhieng 👋",
+          "Welcome to my portfolio",
+          "Built with vanilla JS",
+          "Explore my work..."
+        ];
+
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        let currentIndex = 0;
+
+        // Clear current value and add cursor
+        urlInput.value = '';
+        urlInput.style.caretColor = 'transparent';
+
+        const typeNextChar = () => {
+          if (currentIndex < randomMessage.length) {
+            urlInput.value = randomMessage.substring(0, currentIndex + 1);
+            currentIndex++;
+
+            // Trigger omnibox as we type
+            if (currentIndex > 2) {
+              this.handleOmniboxInput(urlInput.value);
+            }
+
+            // Variable typing speed for more natural feel
+            const baseSpeed = 80;
+            const variance = Math.random() * 40;
+            setTimeout(typeNextChar, baseSpeed + variance);
+          } else {
+            // Typing complete - pause then clear
+            setTimeout(() => {
+              this.clearWelcomeMessage();
+            }, 2000);
+          }
+        };
+
+        typeNextChar();
+      }
+
+      clearWelcomeMessage() {
+        const urlInput = document.getElementById('url-input');
+        if (!urlInput) return;
+
+        let currentText = urlInput.value;
+        let currentIndex = currentText.length;
+
+        const deleteNextChar = () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            urlInput.value = currentText.substring(0, currentIndex);
+
+            // Hide omnibox as we delete
+            if (currentIndex <= 2) {
+              this.hideOmnibox();
+            }
+
+            setTimeout(deleteNextChar, 30);
+          } else {
+            // Deletion complete - restore normal URL
+            urlInput.value = 'bunchhieng.github.io';
+            urlInput.style.caretColor = '';
+
+            // Show welcome notification
+            this.showNotification('👋 Welcome! Explore the tabs above');
+          }
+        };
+
+        deleteNextChar();
+      }
+
+      // Dino Game
+      openDinoGame() {
+        const modal = document.getElementById('dino-game-modal');
+        if (!modal) return;
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Initialize game if not already done
+        if (!this.dinoGame) {
+          this.dinoGame = new DinoGame();
+        } else {
+          this.dinoGame.reset();
+        }
+      }
+
+      closeDinoGame() {
+        const modal = document.getElementById('dino-game-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+          if (this.dinoGame) {
+            this.dinoGame.stop();
+          }
+        }
+      }
+    }
+
+    // Dino Game Class
+    class DinoGame {
+      constructor() {
+        this.canvas = document.getElementById('dino-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.score = 0;
+        this.highScore = parseInt(localStorage.getItem('dinoHighScore')) || 0;
+        this.isRunning = false;
+        this.gameOver = false;
+        this.speed = 6;
+        this.gravity = 0.6;
+
+        // Dino properties
+        this.dino = {
+          x: 50,
+          y: 150,
+          width: 44,
+          height: 48,
+          velocityY: 0,
+          isJumping: false
+        };
+
+        // Obstacles
+        this.obstacles = [];
+        this.obstacleTimer = 0;
+        this.obstacleInterval = 90;
+
+        this.init();
+      }
+
+      init() {
+        this.updateHighScore();
+        this.updateScore();
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => this.handleKeyPress(e));
+        document.getElementById('dino-game-close')?.addEventListener('click', () => {
+          if (window.chromeBrowser) {
+            window.chromeBrowser.closeDinoGame();
+          }
+        });
+
+        this.showStartHint();
+      }
+
+      showStartHint() {
+        const startHint = document.getElementById('dino-start-hint');
+        if (startHint) {
+          startHint.classList.remove('hidden');
+        }
+      }
+
+      hideStartHint() {
+        const startHint = document.getElementById('dino-start-hint');
+        if (startHint) {
+          startHint.classList.add('hidden');
+        }
+      }
+
+      handleKeyPress(e) {
+        if (e.code === 'Space') {
+          e.preventDefault();
+
+          if (!this.isRunning && !this.gameOver) {
+            this.start();
+          } else if (this.gameOver) {
+            this.reset();
+          } else if (!this.dino.isJumping) {
+            this.jump();
+          }
+        }
+      }
+
+      start() {
+        this.isRunning = true;
+        this.gameOver = false;
+        this.hideStartHint();
+        this.gameLoop();
+      }
+
+      stop() {
+        this.isRunning = false;
+      }
+
+      reset() {
+        this.score = 0;
+        this.speed = 6;
+        this.obstacles = [];
+        this.obstacleTimer = 0;
+        this.dino.y = 150;
+        this.dino.velocityY = 0;
+        this.dino.isJumping = false;
+        this.gameOver = false;
+        this.updateScore();
+
+        const gameOverEl = document.getElementById('dino-game-over');
+        if (gameOverEl) {
+          gameOverEl.classList.add('hidden');
+        }
+
+        this.start();
+      }
+
+      jump() {
+        if (!this.dino.isJumping) {
+          this.dino.velocityY = -12;
+          this.dino.isJumping = true;
+        }
+      }
+
+      updateScore() {
+        const scoreEl = document.getElementById('dino-score');
+        if (scoreEl) {
+          scoreEl.textContent = String(Math.floor(this.score)).padStart(5, '0');
+        }
+      }
+
+      updateHighScore() {
+        const highScoreEl = document.getElementById('dino-high-score');
+        if (highScoreEl) {
+          highScoreEl.textContent = 'HI ' + String(this.highScore).padStart(5, '0');
+        }
+      }
+
+      gameLoop() {
+        if (!this.isRunning) return;
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Update dino
+        if (this.dino.isJumping) {
+          this.dino.velocityY += this.gravity;
+          this.dino.y += this.dino.velocityY;
+
+          if (this.dino.y >= 150) {
+            this.dino.y = 150;
+            this.dino.velocityY = 0;
+            this.dino.isJumping = false;
+          }
+        }
+
+        // Draw ground line
+        this.ctx.strokeStyle = '#535353';
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 198);
+        this.ctx.lineTo(this.canvas.width, 198);
+        this.ctx.stroke();
+
+        // Draw dino
+        this.drawDino();
+
+        // Generate obstacles
+        this.obstacleTimer++;
+        if (this.obstacleTimer > this.obstacleInterval) {
+          this.obstacles.push({
+            x: this.canvas.width,
+            y: 170,
+            width: 20,
+            height: 40
+          });
+          this.obstacleTimer = 0;
+        }
+
+        // Update and draw obstacles
+        for (let i = this.obstacles.length - 1; i >= 0; i--) {
+          const obs = this.obstacles[i];
+          obs.x -= this.speed;
+
+          // Draw obstacle (cactus)
+          this.drawCactus(obs.x, obs.y, obs.width, obs.height);
+
+          // Remove off-screen obstacles
+          if (obs.x + obs.width < 0) {
+            this.obstacles.splice(i, 1);
+            this.score += 10;
+            this.updateScore();
+
+            // Increase difficulty
+            if (this.score % 100 === 0) {
+              this.speed += 0.5;
+              this.obstacleInterval = Math.max(50, this.obstacleInterval - 5);
+            }
+          }
+
+          // Collision detection
+          if (this.checkCollision(obs)) {
+            this.endGame();
+          }
+        }
+
+        if (!this.gameOver) {
+          requestAnimationFrame(() => this.gameLoop());
+        }
+      }
+
+      drawDino() {
+        const x = this.dino.x;
+        const y = this.dino.y;
+
+        // Body
+        this.ctx.fillStyle = '#535353';
+        this.ctx.fillRect(x + 10, y + 10, 25, 25);
+
+        // Head
+        this.ctx.fillRect(x + 25, y, 15, 15);
+
+        // Eye
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(x + 30, y + 3, 4, 4);
+
+        // Legs
+        this.ctx.fillStyle = '#535353';
+        this.ctx.fillRect(x + 12, y + 35, 6, 10);
+        this.ctx.fillRect(x + 25, y + 35, 6, 10);
+
+        // Tail
+        this.ctx.fillRect(x + 5, y + 15, 8, 8);
+      }
+
+      drawCactus(x, y, width, height) {
+        this.ctx.fillStyle = '#535353';
+        // Main body
+        this.ctx.fillRect(x + 6, y, 8, height);
+        // Left arm
+        this.ctx.fillRect(x, y + 10, 6, 15);
+        // Right arm
+        this.ctx.fillRect(x + 14, y + 15, 6, 12);
+      }
+
+      checkCollision(obstacle) {
+        return (
+          this.dino.x < obstacle.x + obstacle.width &&
+          this.dino.x + this.dino.width > obstacle.x &&
+          this.dino.y < obstacle.y + obstacle.height &&
+          this.dino.y + this.dino.height > obstacle.y
+        );
+      }
+
+      endGame() {
+        this.gameOver = true;
+        this.isRunning = false;
+
+        // Update high score
+        if (this.score > this.highScore) {
+          this.highScore = this.score;
+          localStorage.setItem('dinoHighScore', this.highScore);
+          this.updateHighScore();
+        }
+
+        // Show game over
+        const gameOverEl = document.getElementById('dino-game-over');
+        if (gameOverEl) {
+          gameOverEl.classList.remove('hidden');
+        }
+      }
     }
 
     // Initialize on DOM load
@@ -6652,9 +8063,104 @@
             setTimeout(() => initNetworkPanel(), 100);
           } else if (panelId === 'elements-panel') {
             setTimeout(() => initElementsPanel(), 100);
+          } else if (panelId === 'sources-panel') {
+            setTimeout(() => initSourcesPanel(), 100);
           }
         });
       });
+
+      // Sources Panel
+      function initSourcesPanel() {
+        // View Page Source button
+        const viewSourceBtn = document.getElementById('view-page-source-btn');
+        const indexHtmlFile = document.getElementById('index-html-file');
+
+        if (viewSourceBtn && !viewSourceBtn.dataset.initialized) {
+          viewSourceBtn.dataset.initialized = 'true';
+          viewSourceBtn.addEventListener('click', () => {
+            if (window.chromeBrowser) {
+              window.chromeBrowser.viewPageSource();
+            }
+          });
+        }
+
+        // File selection
+        if (indexHtmlFile && !indexHtmlFile.dataset.initialized) {
+          indexHtmlFile.dataset.initialized = 'true';
+          indexHtmlFile.addEventListener('click', () => {
+            showSourceInViewer();
+          });
+        }
+      }
+
+      function showSourceInViewer() {
+        const viewer = document.querySelector('.sources-viewer');
+        const indexHtmlFile = document.getElementById('index-html-file');
+
+        if (!viewer) return;
+
+        // Mark file as active
+        document.querySelectorAll('.sources-file').forEach(f => f.classList.remove('active'));
+        indexHtmlFile?.classList.add('active');
+
+        // Get HTML content
+        const htmlContent = document.documentElement.outerHTML;
+        const lines = htmlContent.split('\n');
+        const lineCount = lines.length;
+
+        // For large files (>1000 lines), use plain text without syntax highlighting
+        if (lineCount > 1000) {
+          viewer.innerHTML = `
+            <div style="padding: 12px; background: #2d2d2d; border-bottom: 1px solid #3c3c3c; color: #d4d4d4; font-size: 12px;">
+              <strong>Large file detected (${lineCount} lines)</strong> - Syntax highlighting disabled for performance
+              <button onclick="copySourceToClipboard()" style="margin-left: 12px; padding: 4px 8px; background: #3c9ae8; border: none; color: white; border-radius: 3px; cursor: pointer; font-size: 11px;">
+                Copy to Clipboard
+              </button>
+            </div>
+            <pre class="sources-code" id="plain-source-code" style="margin: 0; padding: 12px; white-space: pre; overflow: auto; color: #d4d4d4; line-height: 1.5;">${escapeHtmlForSources(htmlContent)}</pre>
+          `;
+        } else {
+          // For smaller files, use syntax highlighting
+          const escaped = escapeHtmlForSources(htmlContent);
+          const highlighted = lines.map((line, index) => {
+            const lineNum = index + 1;
+            const coloredLine = highlightHtmlSyntaxForSources(escapeHtmlForSources(line));
+            return `<span class="chrome-view-source-line"><span class="chrome-view-source-line-number">${lineNum}</span>${coloredLine}</span>`;
+          }).join('\n');
+          viewer.innerHTML = `<pre class="sources-code">${highlighted}</pre>`;
+        }
+      }
+
+      // Global function for copy button
+      window.copySourceToClipboard = function() {
+        const htmlContent = document.documentElement.outerHTML;
+        navigator.clipboard.writeText(htmlContent).then(() => {
+          if (window.chromeBrowser) {
+            window.chromeBrowser.showNotification('Source copied to clipboard!');
+          } else {
+            alert('Source copied to clipboard!');
+          }
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+        });
+      };
+
+      function escapeHtmlForSources(html) {
+        const div = document.createElement('div');
+        div.textContent = html;
+        return div.innerHTML;
+      }
+
+      function highlightHtmlSyntaxForSources(line) {
+        return line
+          .replace(/(&lt;!DOCTYPE[^&]*&gt;)/gi, '<span class="source-doctype">$1</span>')
+          .replace(/(&lt;!--.*?--&gt;)/g, '<span class="source-comment">$1</span>')
+          .replace(/(&lt;\/?[\w-]+)/g, '<span class="source-tag">$1</span>')
+          .replace(/(&gt;)/g, '<span class="source-tag">$1</span>')
+          .replace(/([\w-]+)=/g, '<span class="source-attr">$1</span>=')
+          .replace(/=&quot;([^&]*)&quot;/g, '=<span class="source-string">&quot;$1&quot;</span>')
+          .replace(/=&#39;([^&]*)&#39;/g, '=<span class="source-string">&#39;$1&#39;</span>');
+      }
 
       // Performance Monitoring
       let performanceData = {
@@ -6937,33 +8443,43 @@
 
         if (!treeContainer) return;
 
-        // Build DOM tree from content area
-        const contentArea = document.getElementById('content-area');
-        if (contentArea) {
-          buildDOMTree(treeContainer, contentArea);
-        } else {
-          buildDOMTree(treeContainer, document.body);
-        }
+        // Build DOM tree - start with content area or portfolio/blog sections only
+        treeContainer.innerHTML = '<div style="padding: 12px; color: #9d9d9d; font-size: 12px;">Loading DOM tree...</div>';
+
+        setTimeout(() => {
+          treeContainer.innerHTML = '';
+          const targetElement = document.querySelector('.chrome-content') ||
+                               document.getElementById('portfolio-content') ||
+                               document.getElementById('blog-content') ||
+                               document.body;
+
+          // Only render first 2 levels by default for performance
+          buildDOMTree(treeContainer, targetElement, 0, 2);
+        }, 100);
 
         // Refresh button
-        if (refreshBtn) {
+        if (refreshBtn && !refreshBtn.dataset.initialized) {
+          refreshBtn.dataset.initialized = 'true';
           refreshBtn.addEventListener('click', () => {
-            treeContainer.innerHTML = '';
-            const contentArea = document.getElementById('content-area');
-            if (contentArea) {
-              buildDOMTree(treeContainer, contentArea);
-            } else {
-              buildDOMTree(treeContainer, document.body);
-            }
+            treeContainer.innerHTML = '<div style="padding: 12px; color: #9d9d9d; font-size: 12px;">Refreshing...</div>';
+            setTimeout(() => {
+              treeContainer.innerHTML = '';
+              const targetElement = document.querySelector('.chrome-content') ||
+                                   document.getElementById('portfolio-content') ||
+                                   document.getElementById('blog-content') ||
+                                   document.body;
+              buildDOMTree(treeContainer, targetElement, 0, 2);
+            }, 100);
           });
         }
 
         // Select element button
-        if (selectBtn) {
+        if (selectBtn && !selectBtn.dataset.initialized) {
+          selectBtn.dataset.initialized = 'true';
           selectBtn.addEventListener('click', () => {
             isSelectingElement = !isSelectingElement;
             selectBtn.classList.toggle('active');
-            
+
             if (isSelectingElement) {
               enableElementSelection();
             } else {
@@ -6973,16 +8489,23 @@
         }
 
         // Filter input
-        if (filterInput) {
+        if (filterInput && !filterInput.dataset.initialized) {
+          filterInput.dataset.initialized = 'true';
           filterInput.addEventListener('input', (e) => {
             filterDOMTree(e.target.value);
           });
         }
       }
 
-      function buildDOMTree(container, element, level = 0) {
-        if (!element || element.id === 'devtools' || element.id === 'chrome-window' || 
-            element.classList?.contains('chrome-devtools') || element.classList?.contains('chrome-window')) {
+      function buildDOMTree(container, element, level = 0, maxDepth = 2) {
+        if (!element || element.id === 'devtools' || element.id === 'chrome-window' ||
+            element.classList?.contains('chrome-devtools') || element.classList?.contains('chrome-window') ||
+            element.classList?.contains('chrome-view-source-modal') || element.classList?.contains('chrome-page-context-menu')) {
+          return;
+        }
+
+        // Skip if we've exceeded max depth
+        if (level >= maxDepth && maxDepth !== -1) {
           return;
         }
 
@@ -6993,9 +8516,13 @@
 
         const children = Array.from(element.children).filter(child => {
           return child.id !== 'devtools' && child.id !== 'chrome-window' &&
-                 !child.classList?.contains('chrome-devtools') && !child.classList?.contains('chrome-window');
+                 !child.classList?.contains('chrome-devtools') &&
+                 !child.classList?.contains('chrome-window') &&
+                 !child.classList?.contains('chrome-view-source-modal') &&
+                 !child.classList?.contains('chrome-page-context-menu');
         });
         const hasChildren = children.length > 0;
+        const atMaxDepth = level === maxDepth - 1 && maxDepth !== -1;
         const hasText = element.childNodes.length > 0 && 
           Array.from(element.childNodes).some(node => 
             node.nodeType === 3 && node.textContent.trim().length > 0
@@ -7007,6 +8534,12 @@
         if (hasChildren) {
           expander.addEventListener('click', (e) => {
             e.stopPropagation();
+            // If at max depth and children not loaded yet, load them now
+            if (atMaxDepth && childrenContainer.children.length === 0) {
+              children.forEach(child => {
+                buildDOMTree(childrenContainer, child, level + 1, -1); // -1 = no limit
+              });
+            }
             toggleElementNode(expander, childrenContainer);
           });
         }
@@ -7053,10 +8586,21 @@
         // Children container
         const childrenContainer = document.createElement('div');
         childrenContainer.className = 'element-children';
-        if (hasChildren) {
+
+        // Only build children if we haven't reached max depth
+        if (hasChildren && !atMaxDepth) {
           children.forEach(child => {
-            buildDOMTree(childrenContainer, child, level + 1);
+            buildDOMTree(childrenContainer, child, level + 1, maxDepth);
           });
+        } else if (hasChildren && atMaxDepth) {
+          // Add placeholder to show there are more children (will load on expand)
+          const placeholder = document.createElement('div');
+          placeholder.style.paddingLeft = ((level + 1) * 16) + 'px';
+          placeholder.style.color = '#9d9d9d';
+          placeholder.style.fontSize = '12px';
+          placeholder.style.fontStyle = 'italic';
+          placeholder.textContent = `... ${children.length} more child${children.length !== 1 ? 'ren' : ''} (click to load)`;
+          childrenContainer.appendChild(placeholder);
         }
 
         // Text content (if any and no children)
